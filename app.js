@@ -439,7 +439,7 @@ const GUEST_MODE_DATA = {
 };
 
 // API Configuration
-const API_BASE = 'https://your-backend.vercel.app'; // Change this to your backend URL!
+const API_BASE = 'https://nutrition-backend-v2-a3nv.vercel.app';
 
 // Application State
 class NutritionApp {
