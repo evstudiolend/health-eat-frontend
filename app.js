@@ -999,11 +999,18 @@ class NutritionApp {
     alert(`Ингредиенты из "${recipe.title}" добавлены в список покупок!`);
   }
 
-  // -----------------------------------------------------------
+   // -----------------------------------------------------------
   // AI: нормализация рецепта
   // -----------------------------------------------------------
-
   normalizeAIRecipe(r) {
+    // если бекенд уже посчитал КБЖУ (r.kbju) — берём его
+    const kbju = r.kbju || {
+      kcal: r.kcal,
+      protein: r.protein,
+      fat: r.fat,
+      carbs: r.carbs
+    };
+
     return {
       id: generateId(),
       title: r.title || "Новое блюдо",
@@ -1016,7 +1023,12 @@ class NutritionApp {
       office_friendly: true,
       tags: r.tags || ["AI-рецепт", "быстрое"],
       servings: r.servings || 1,
-      kbju: r.kbju || { kcal: 0, protein: 0, fat: 0, carbs: 0 },
+      kbju: {
+        kcal: kbju?.kcal ?? 300,
+        protein: kbju?.protein ?? 15,
+        fat: kbju?.fat ?? 10,
+        carbs: kbju?.carbs ?? 25
+      },
       ingredients: r.ingredients || ["Ингредиенты не указаны"],
       steps: r.steps || ["Шаги приготовления не указаны"]
     };
