@@ -409,7 +409,7 @@ const SAMPLE_RECIPES = [
 
 const COMMON_INGREDIENTS = [
   "Куриная грудка",
-  "Яйца",
+  "Яйцы",
   "Творог",
   "Греческий йогурт",
   "Гречка",
@@ -538,7 +538,7 @@ class NutritionApp {
     const input = document.getElementById("backend-url");
     if (!input) return;
     const url = input.value.trim();
-    if (!url) {
+       if (!url) {
       alert("Введите URL backend");
       return;
     }
@@ -1234,18 +1234,70 @@ class NutritionApp {
     });
   }
 
-  searchByIngredients() {
-    if (this.selectedIngredients.length === 0) {
-      alert("Выберите хотя бы один ингредиент");
-      return;
-    }
-
+  // 🔥 ОБНОВЛЕНО: поиск «Из остатков» через AI + ручной ввод
+  async searchByIngredients() {
     const container = document.getElementById("pantry-recipes");
     if (!container) return;
 
+    // ручной ввод (через запятую или с новой строки)
+    const manualInput = document.getElementById("pantry-free-input");
+    const extra = [];
+    if (manualInput && manualInput.value.trim()) {
+      manualInput.value
+        .split(/[,;\n]/)
+        .map(s => s.trim())
+        .filter(Boolean)
+        .forEach(v => extra.push(v));
+    }
+
+    const allIngredients = [...this.selectedIngredients, ...extra];
+
+    if (!allIngredients.length) {
+      alert("Выберите или введите хотя бы один ингредиент");
+      return;
+    }
+
+    // прелоадер
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">🤖</div>
+        <p>Подбираю рецепты из ваших продуктов…</p>
+      </div>`;
+
+    // сначала пробуем AI
+    try {
+      const resp = await fetch(`${this.user.backendUrl}/api/search/pantry`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ingredients: allIngredients,
+          time_limit: null,
+          kbjuTarget: this.user.target
+        })
+      });
+
+      if (!resp.ok) throw new Error("AI pantry error");
+
+      const data = await resp.json();
+
+      if (Array.isArray(data.recipes) && data.recipes.length) {
+        const normalized = data.recipes.map(r => this.normalizeAIRecipe(r));
+        this.aiRecipes.push(...normalized);
+        saveUserAIRecipes(this.aiRecipes);
+
+        container.innerHTML = normalized
+          .map(r => this.renderRecipeCard(r))
+          .join("");
+        return;
+      }
+    } catch (e) {
+      console.warn("AI pantry недоступен, fallback к локальному поиску:", e);
+    }
+
+    // если AI не сработал — старый локальный поиск по базе
     const matches = this.getAllRecipesMerged().filter(recipe => {
-      const ingText = recipe.ingredients.join(" ").toLowerCase();
-      return this.selectedIngredients.some(ing =>
+      const ingText = (recipe.ingredients || []).join(" ").toLowerCase();
+      return allIngredients.some(ing =>
         ingText.includes(ing.toLowerCase())
       );
     });
@@ -1254,7 +1306,7 @@ class NutritionApp {
       container.innerHTML = `
         <div class="empty-state">
           <div class="empty-state-icon">😕</div>
-          <p>Не найдено рецептов с выбранными ингредиентами</p>
+          <p>Не найдено рецептов с такими продуктами</p>
         </div>`;
       return;
     }
