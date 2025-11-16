@@ -1204,11 +1204,26 @@ class NutritionApp {
     }
   }
 
-  // -----------------------------------------------------------
+    // -----------------------------------------------------------
   // Ингредиенты — выбор и поиск
   // -----------------------------------------------------------
 
+  // 🔥 РУЧНОЙ ДОБАВЛЕНИЕ ПРОДУКТА
+  addManualIngredient() {
+    const input = document.getElementById("manual-ingredient-input");
+    if (!input) return;
+
+    const value = input.value.trim();
+    if (!value) return;
+
+    this.selectedIngredients.push(value);
+
+    input.value = "";
+    this.searchByIngredients();
+  }
+
   renderIngredientChips() {
+
     const container = document.getElementById("ingredient-chips");
     if (!container) return;
 
