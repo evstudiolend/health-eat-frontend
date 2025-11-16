@@ -201,8 +201,16 @@
                 <p style="color: var(--color-text-secondary); margin-bottom: 24px;">Выберите продукты, которые у вас есть</p>
                 
                 <div class="ingredient-chips" id="ingredient-chips"></div>
-                
-                <button class="btn" style="width: 100%; margin: 24px 0;" onclick="app.searchByIngredients()">Найти рецепты</button>
+            
+<!-- ✨ Новое поле ввода -->
+<input 
+  id="manual-ingredient-input"
+  type="text"
+  placeholder="Введите продукт..."
+  onkeydown="if(event.key==='Enter'){ app.addManualIngredient(); }"
+/>
+
+<button class="btn-primary" onclick="app.searchByIngredients()">Найти рецепты</button>
                 
                 <div class="recipe-grid" id="pantry-recipes"></div>
             </div>
