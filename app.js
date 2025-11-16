@@ -1016,12 +1016,7 @@ class NutritionApp {
       office_friendly: true,
       tags: r.tags || ["AI-рецепт", "быстрое"],
       servings: r.servings || 1,
-      kbju: {
-        kcal: r.kcal || 300,
-        protein: r.protein || 15,
-        fat: r.fat || 10,
-        carbs: r.carbs || 25
-      },
+      kbju: r.kbju || { kcal: 0, protein: 0, fat: 0, carbs: 0 },
       ingredients: r.ingredients || ["Ингредиенты не указаны"],
       steps: r.steps || ["Шаги приготовления не указаны"]
     };
