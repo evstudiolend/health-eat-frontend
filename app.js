@@ -1550,6 +1550,102 @@ class NutritionApp {
     localStorage.removeItem("nutrition_ai_recipes");
     window.location.reload();
   }
+    // -----------------------------------------------------------
+  // Backend helper
+  // -----------------------------------------------------------
+  getBackendUrl() {
+    return this.user.backendUrl;
+  }
+
+  // -----------------------------------------------------------
+  // AI: Быстро сейчас
+  // -----------------------------------------------------------
+  async loadQuickRecipes() {
+    const backend = this.getBackendUrl();
+    if (!backend) return alert("Укажите Backend URL в профиле");
+
+    const userInput = "Быстрое блюдо до 10 минут";
+
+    const grid = document.getElementById("quick-recipes");
+    grid.innerHTML = "<p>Загружаю…</p>";
+
+    try {
+      const res = await fetch(`${backend}/api/ai/quick`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userInput })
+      });
+
+      const data = await res.json();
+
+      if (!data.recipes?.length) {
+        grid.innerHTML = "<p>Рецептов не найдено</p>";
+        return;
+      }
+
+      // нормализуем и сохраняем в локальное хранилище
+      const normalized = data.recipes.map(r => this.normalizeAIRecipe(r));
+      this.aiRecipes.push(...normalized);
+      saveUserAIRecipes(this.aiRecipes);
+
+      grid.innerHTML = normalized
+        .map(r => this.renderRecipeCard(r))
+        .join("");
+    } catch (err) {
+      console.error("Quick error:", err);
+      grid.innerHTML = "<p>Ошибка загрузки</p>";
+    }
+  }
+
+  openQuickScreen() {
+    this.showScreen("quick-screen");
+    this.loadQuickRecipes();
+  }
+
+  // -----------------------------------------------------------
+  // AI: Строгий подбор под КБЖУ
+  // -----------------------------------------------------------
+  async loadStrictKbjuRecipes() {
+    const backend = this.getBackendUrl();
+    if (!backend) return alert("Укажите Backend URL в профиле");
+
+    const grid = document.getElementById("kbju-recipes");
+    grid.innerHTML = "<p>Загружаю…</p>";
+
+    try {
+      const res = await fetch(`${backend}/api/ai/strict-kbju`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          targetKcal: this.user.target.kcal,
+          message: "Сбалансированное блюдо на 1 порцию"
+        })
+      });
+
+      const data = await res.json();
+
+      if (!data.recipes?.length) {
+        grid.innerHTML = "<p>Рецептов не найдено</p>";
+        return;
+      }
+
+      const normalized = data.recipes.map(r => this.normalizeAIRecipe(r));
+      this.aiRecipes.push(...normalized);
+      saveUserAIRecipes(this.aiRecipes);
+
+      grid.innerHTML = normalized
+        .map(r => this.renderRecipeCard(r))
+        .join("");
+    } catch (err) {
+      console.error("Strict KBJU error:", err);
+      grid.innerHTML = "<p>Ошибка загрузки</p>";
+    }
+  }
+
+  openKbjuScreen() {
+    this.showScreen("kbju-match-screen");
+    this.loadStrictKbjuRecipes();
+  }
 }
 
 // -------------------------------------------------------------
