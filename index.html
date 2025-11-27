@@ -48,34 +48,33 @@
             </div>
 
             <!-- Goal Selection -->
-            <div class="screen" id="goal-screen">
-                <div class="onboarding">
-                    <h1>Ваша цель?</h1>
-                    <p style="color: var(--color-text-secondary); margin-bottom: 32px;">Выберите, что вам ближе всего</p>
-                    
-                    <div class="goal-buttons">
-                        <button class="goal-btn" data-goal="lose" onclick="app.selectGoal('lose')">
-                            <div style="font-size: 24px; margin-bottom: 8px;">📉</div>
-                            <strong>Снизить вес</strong>
-                            <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровое похудение</p>
-                        </button>
-                        
-                        <button class="goal-btn" data-goal="maintain" onclick="app.selectGoal('maintain')">
-                            <div style="font-size: 24px; margin-bottom: 8px;">⚖️</div>
-                            <strong>Поддерживать вес</strong>
-                            <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Сохранить текущую форму</p>
-                        </button>
-                        
-                        <button class="goal-btn" data-goal="gain" onclick="app.selectGoal('gain')">
-                            <div style="font-size: 24px; margin-bottom: 8px;">📈</div>
-                            <strong>Набрать массу</strong>
-                            <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровый набор веса</p>
-                        </button>
-                    </div>
-                    
+<div class="screen" id="goal-screen">
+    <div class="onboarding">
+        <h1>Ваша цель?</h1>
+        <p style="color: var(--color-text-secondary); margin-bottom: 32px;">Выберите, что вам ближе всего</p>
+        
+        <div class="goal-buttons">
+            <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
+                <div style="font-size: 24px; margin-bottom: 8px;">📉</div>
+                <strong>Снизить вес</strong>
+                <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровое похудение</p>
+            </button>
+            
+            <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
+                <div style="font-size: 24px; margin-bottom: 8px;">⚖️</div>
+                <strong>Поддерживать вес</strong>
+                <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Сохранить текущую форму</p>
+            </button>
+            
+            <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
+                <div style="font-size: 24px; margin-bottom: 8px;">📈</div>
+                <strong>Набрать массу</strong>
+                <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровый набор веса</p>
+            </button>
+        </div>
+    </div>
+</div>
 
-                </div>
-            </div>
 
             <!-- Dashboard -->
             <div class="screen" id="dashboard-screen">
