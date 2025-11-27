@@ -1647,6 +1647,85 @@ class NutritionApp {
     this.loadStrictKbjuRecipes();
   }
 }
+// ===========================
+// AI: Быстро сейчас — кастомный поиск
+// ===========================
+async searchQuickCustom() {
+    const backend = this.getBackendUrl();
+    if (!backend) return alert("Укажите Backend URL в профиле");
+
+    const query = document.getElementById("quick-user-query").value.trim();
+    if (!query) return alert("Введите ваши пожелания!");
+
+    const grid = document.getElementById("quick-recipes");
+    grid.innerHTML = "<p>Готовлю для вас варианты…</p>";
+
+    try {
+        const res = await fetch(`${backend}/api/ai/quick`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: query })
+        });
+
+        const data = await res.json();
+
+        if (!data.recipes?.length) {
+            grid.innerHTML = "<p>Рецептов не найдено</p>";
+            return;
+        }
+
+        const normalized = data.recipes.map(r => this.normalizeAIRecipe(r));
+        this.aiRecipes.push(...normalized);
+        saveUserAIRecipes(this.aiRecipes);
+
+        grid.innerHTML = normalized.map(r => this.renderRecipeCard(r)).join("");
+    } catch (err) {
+        console.error("Quick custom error:", err);
+        grid.innerHTML = "<p>Ошибка загрузки рецептов</p>";
+    }
+}
+// ===========================
+// AI: Подбор под КБЖУ — кастомный поиск
+// ===========================
+async searchStrictKbjuCustom() {
+    const backend = this.getBackendUrl();
+    if (!backend) return alert("Укажите Backend URL в профиле");
+
+    const query = document.getElementById("kbju-user-query").value.trim();
+    if (!query) return alert("Введите пожелания по КБЖУ!");
+
+    const grid = document.getElementById("kbju-recipes");
+    grid.innerHTML = "<p>Подбираю лучший вариант…</p>";
+
+    const target = this.user.target; // дневная цель
+
+    try {
+        const res = await fetch(`${backend}/api/ai/strict-kbju`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                targetKcal: target.kcal,
+                message: query
+            })
+        });
+
+        const data = await res.json();
+
+        if (!data.recipes?.length) {
+            grid.innerHTML = "<p>Рецептов не найдено</p>";
+            return;
+        }
+
+        const normalized = data.recipes.map(r => this.normalizeAIRecipe(r));
+        this.aiRecipes.push(...normalized);
+        saveUserAIRecipes(this.aiRecipes);
+
+        grid.innerHTML = normalized.map(r => this.renderRecipeCard(r)).join("");
+    } catch (err) {
+        console.error("Strict KBJU custom error:", err);
+        grid.innerHTML = "<p>Ошибка загрузки рецептов</p>";
+    }
+}
 
 // -------------------------------------------------------------
 // 5. Глобальный экземпляр
