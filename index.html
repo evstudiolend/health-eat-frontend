@@ -155,6 +155,20 @@
                 <div class="back-button" onclick="app.showScreen('dashboard-screen')">← Назад</div>
                 <h2>⚡ Быстро сейчас</h2>
                 <p style="color: var(--color-text-secondary); margin-bottom: 24px;">Быстрые рецепты до 10 минут</p>
+                <div class="quick-input-box">
+    <input 
+        id="quick-user-query"
+        type="text"
+        class="input-text"
+        placeholder="Например: несладкое из творога, белковое, до 7 минут..."
+        style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #ddd;"
+    />
+
+    <button class="btn btn-large" onclick="app.searchQuickCustom()" style="width: 100%;">
+        Найти быстрый рецепт
+    </button>
+</div>
+
                 
                 <div class="recipe-grid" id="quick-recipes"></div>
             </div>
@@ -219,6 +233,20 @@
             <div class="screen" id="kbju-match-screen">
                 <div class="back-button" onclick="app.showScreen('dashboard-screen')">← Назад</div>
                 <h2>🎯 Подбор под КБЖУ</h2>
+                <div class="kbju-search-box">
+    <input 
+        id="kbju-user-query"
+        type="text"
+        class="input-text"
+        placeholder="Например: осталось 350 ккал, нужно белковое, мало жиров..."
+        style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #ddd;"
+    />
+
+    <button class="btn btn-large" onclick="app.searchStrictKbjuCustom()" style="width: 100%;">
+        Найти варианты
+    </button>
+</div>
+
                 
                 <div class="kbju-target">
                     <h3 style="margin-top: 0;">Ваша цель на день</h3>
