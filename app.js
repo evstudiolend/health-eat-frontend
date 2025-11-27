@@ -651,38 +651,6 @@ class NutritionApp {
     this.showScreen("goal-screen");
   }
 
-  selectGoal(goal) {
-    this.user.goal = goal;
-
-    const defaults = {
-      lose: { kcal: 1600, protein: 120, fat: 50, carbs: 140 },
-      maintain: { kcal: 1800, protein: 120, fat: 60, carbs: 160 },
-      gain: { kcal: 2200, protein: 140, fat: 70, carbs: 200 }
-    };
-
-    const t = defaults[goal];
-
-    document.getElementById("target-kcal").value = t.kcal;
-    document.getElementById("target-protein").value = t.protein;
-    document.getElementById("target-fat").value = t.fat;
-    document.getElementById("target-carbs").value = t.carbs;
-
-    saveUserState(this.user);
-    this.showScreen("kbju-screen");
-  }
-
-  completeOnboarding() {
-    this.user.target = {
-      kcal: parseInt(document.getElementById("target-kcal").value),
-      protein: parseInt(document.getElementById("target-protein").value),
-      fat: parseInt(document.getElementById("target-fat").value),
-      carbs: parseInt(document.getElementById("target-carbs").value)
-    };
-
-    saveUserState(this.user);
-    this.showScreen("dashboard-screen");
-  }
-
   // -----------------------------------------------------------
   // Дашборд
   // -----------------------------------------------------------
