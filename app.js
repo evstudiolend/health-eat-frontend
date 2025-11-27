@@ -587,7 +587,7 @@ class NutritionApp {
     const header = document.getElementById("header");
     const bottomNav = document.getElementById("bottom-nav");
     const sosFab = document.getElementById("sos-fab");
-    const hideUI = ["onboarding-screen", "goal-screen", "kbju-screen"];
+    const hideUI = ["onboarding-screen", "goal-screen"];
 
     if (header && bottomNav && sosFab) {
       if (hideUI.includes(screenId)) {
