@@ -217,14 +217,20 @@
                 <div class="ingredient-chips" id="ingredient-chips"></div>
             
 <!-- ✨ Новое поле ввода -->
-<input 
-  id="manual-ingredient-input"
-  type="text"
-  placeholder="Введите продукт..."
-  onkeydown="if(event.key==='Enter'){ app.addManualIngredient(); }"
-/>
+<div class="input-row" style="margin-top: 16px; margin-bottom: 12px;">
+  <input 
+    id="manual-ingredient-input"
+    type="text"
+    class="input-text"
+    placeholder="Например: куриная грудка, брокколи, сыр..."
+    onkeydown="if(event.key==='Enter'){ app.addManualIngredient(); }"
+    style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd;"
+  />
+</div>
 
-<button class="btn-primary" onclick="app.searchByIngredients()">Найти рецепты</button>
+<button class="btn btn-large" onclick="app.searchByIngredients()" style="width: 100%; margin-bottom: 12px;">
+  Найти рецепты
+</button>
                 
                 <div class="recipe-grid" id="pantry-recipes"></div>
             </div>
