@@ -1730,6 +1730,81 @@ async searchStrictKbjuCustom() {
 // -------------------------------------------------------------
 // 5. Глобальный экземпляр
 // -------------------------------------------------------------
+window.askQuickRecipe = async function () {
+  const backend = app.getBackendUrl();
+  if (!backend) return alert("Укажите Backend URL в профиле");
+
+  const userInput = document.getElementById("quick-input-box").value.trim();
+  if (!userInput) return alert("Введите запрос!");
+
+  const grid = document.getElementById("quick-results");
+  grid.innerHTML = "<p>🤖 Думаю…</p>";
+
+  try {
+    const res = await fetch(`${backend}/api/ai/quick`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: userInput })
+    });
+
+    const data = await res.json();
+
+    if (!data.recipes?.length) {
+      grid.innerHTML = "<p>Ничего не найдено</p>";
+      return;
+    }
+
+    const normalized = data.recipes.map(r => app.normalizeAIRecipe(r));
+    app.aiRecipes.push(...normalized);
+    saveUserAIRecipes(app.aiRecipes);
+
+    grid.innerHTML = normalized.map(r => app.renderRecipeCard(r)).join("");
+  } catch (err) {
+    console.error(err);
+    grid.innerHTML = "<p>Ошибка при загрузке</p>";
+  }
+};
+window.askKbjuRecipe = async function () {
+  const backend = app.getBackendUrl();
+  if (!backend) return alert("Укажите Backend URL в профиле");
+
+  const input = document.getElementById("kbju-input-box").value.trim();
+  if (!input) return alert("Введите ваш запрос!");
+
+  const grid = document.getElementById("kbju-results");
+  grid.innerHTML = "<p>🤖 Подбираю…</p>";
+
+  // пытаемся извлечь цифры
+  const matchKcal = input.match(/\d+/);
+  const targetKcal = matchKcal ? parseInt(matchKcal[0]) : app.user.target.kcal;
+
+  try {
+    const res = await fetch(`${backend}/api/ai/strict-kbju`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        targetKcal,
+        message: input
+      })
+    });
+
+    const data = await res.json();
+
+    if (!data.recipes?.length) {
+      grid.innerHTML = "<p>Рецептов не найдено</p>";
+      return;
+    }
+
+    const normalized = data.recipes.map(r => app.normalizeAIRecipe(r));
+    app.aiRecipes.push(...normalized);
+    saveUserAIRecipes(app.aiRecipes);
+
+    grid.innerHTML = normalized.map(r => app.renderRecipeCard(r)).join("");
+  } catch (err) {
+    console.error(err);
+    grid.innerHTML = "<p>Ошибка при загрузке</p>";
+  }
+};
 
 const app = new NutritionApp();
 window.app = app;
