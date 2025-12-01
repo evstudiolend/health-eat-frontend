@@ -491,6 +491,7 @@ class NutritionApp {
 
     this.catalogRecipes = [...SAMPLE_RECIPES];
     this.aiRecipes = loadUserAIRecipes();
+    this.customRecipes = loadUserCustomRecipes();
 
     this.chatHistory = [];
     this.selectedIngredients = [];
@@ -712,8 +713,8 @@ class NutritionApp {
   // -----------------------------------------------------------
 
   getAllRecipesMerged() {
-    return [...this.catalogRecipes, ...this.aiRecipes];
-  }
+  return [...this.catalogRecipes, ...this.aiRecipes, ...this.customRecipes];
+}
 
   getFilteredRecipes() {
     let list = this.getAllRecipesMerged();
@@ -722,9 +723,12 @@ class NutritionApp {
       list = list.filter(r => r.visibility === "curated");
     } else if (this.recipeScope === "ai") {
       list = list.filter(r => r.visibility === "ai");
-    } else if (this.recipeScope === "mine") {
-      list = list.filter(r => this.user.savedRecipes.includes(r.id));
-    }
+   } else if (this.recipeScope === "mine") {
+  list = list.filter(
+    r => r.visibility === "mine" || this.user.savedRecipes.includes(r.id)
+  );
+}
+
 
     if (this.filters.category && this.filters.category !== "all") {
       list = list.filter(r => r.category === this.filters.category);
@@ -788,7 +792,17 @@ class NutritionApp {
 
     return `
       <div class="recipe-card" onclick="app.showRecipeDetail('${recipe.id}')">
-        <div class="recipe-image">${recipe.photo || "🤖"}</div>
+        const imageHtml = recipe.imageUrl
+  ? `<img src="${recipe.imageUrl}" alt="${this.escapeHtml(recipe.title)}" class="recipe-photo" />`
+  : (recipe.photo || "🤖");
+
+return `
+  <div class="recipe-card" onclick="app.showRecipeDetail('${recipe.id}')">
+    <div class="recipe-image">
+      ${imageHtml}
+    </div>
+    ...
+`;
         <div class="recipe-content">
           
           ${recipe.visibility === "ai" ? '<span class="ai-badge">🤖 AI</span>' : ""}
@@ -874,7 +888,13 @@ class NutritionApp {
     const difficultyMap = { easy: "Легко", medium: "Средне", hard: "Сложно" };
 
     container.innerHTML = `
-      <div class="recipe-hero">${recipe.photo || "🤖"}</div>
+      <div class="recipe-hero">
+  ${
+    recipe.imageUrl
+      ? `<img src="${recipe.imageUrl}" alt="${this.escapeHtml(recipe.title)}" class="recipe-photo-large" />`
+      : (recipe.photo || "🤖")
+  }
+</div>
       
       <h2>${recipe.title}</h2>
       <p style="color: var(--color-text-secondary); margin-bottom: 24px;">
