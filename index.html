@@ -144,7 +144,86 @@
             <!-- Recipes Screen -->
             <div class="screen" id="recipes-screen">
                 <h2>📖 Рецепты</h2>
-                
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+    <button class="btn btn-secondary" onclick="app.openCreateRecipe()">
+        ➕ Добавить рецепт
+    </button>
+</div>
+<!-- Create Recipe Screen -->
+<div class="screen" id="create-recipe-screen">
+    <div class="back-button" onclick="app.showScreen('recipes-screen')">← Назад</div>
+    <h2>➕ Новый рецепт</h2>
+    <p style="color: var(--color-text-secondary); margin-bottom: 16px;">
+        Добавьте рецепт, который вы лично проверили
+    </p>
+
+    <div class="input-group">
+        <label>Название блюда</label>
+        <input type="text" id="cr-title" class="input-text" placeholder="Например: Творожные оладьи без сахара" />
+    </div>
+
+    <div class="input-group">
+        <label>Категория</label>
+        <select id="cr-category" class="input-text">
+            <option value="breakfast">Завтрак</option>
+            <option value="lunch">Обед</option>
+            <option value="dinner">Ужин</option>
+            <option value="snack">Перекус</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label>Время приготовления (мин)</label>
+        <input type="number" id="cr-cook-time" class="input-text" value="15" />
+    </div>
+
+    <h3 style="margin-top: 20px;">КБЖУ на порцию</h3>
+    <div class="kbju-inputs">
+        <div class="input-group">
+            <label>Калории</label>
+            <input type="number" id="cr-kcal" class="input-text" value="300" />
+        </div>
+        <div class="input-group">
+            <label>Белки (г)</label>
+            <input type="number" id="cr-protein" class="input-text" value="20" />
+        </div>
+        <div class="input-group">
+            <label>Жиры (г)</label>
+            <input type="number" id="cr-fat" class="input-text" value="10" />
+        </div>
+        <div class="input-group">
+            <label>Углеводы (г)</label>
+            <input type="number" id="cr-carbs" class="input-text" value="25" />
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label>Ингредиенты (по одному в строку)</label>
+        <textarea id="cr-ingredients" class="input-text" rows="6" placeholder="Творог 5% — 200 г
+Яйцо — 1 шт
+Рисовая мука — 30 г"></textarea>
+    </div>
+
+    <div class="input-group">
+        <label>Шаги приготовления (по одному в строку)</label>
+        <textarea id="cr-steps" class="input-text" rows="6" placeholder="Смешать все ингредиенты
+Разогреть сковороду
+Обжарить с двух сторон до готовности"></textarea>
+    </div>
+
+    <div class="input-group">
+        <label>Фото готового блюда</label>
+        <input type="file" id="cr-photo" accept="image/*" />
+        <p style="color: var(--color-text-secondary); font-size: 12px; margin-top: 4px;">
+            Фото сохранится только на этом устройстве
+        </p>
+    </div>
+
+    <button class="btn btn-large" style="width: 100%; margin-top: 16px;" onclick="app.saveCustomRecipe()">
+        💾 Сохранить рецепт
+    </button>
+</div>
+
                 <div class="scope-selector" style="margin-bottom: 16px;">
                     <button class="scope-btn" data-scope="curated" onclick="app.setRecipeScope('curated')">От редакции</button>
                     <button class="scope-btn" data-scope="public" onclick="app.setRecipeScope('public')">Публичные</button>
