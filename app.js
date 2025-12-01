@@ -459,6 +459,17 @@ function loadUserAIRecipes() {
     return [];
   }
 }
+function saveUserCustomRecipes(list) {
+  localStorage.setItem("nutrition_custom_recipes", JSON.stringify(list));
+}
+
+function loadUserCustomRecipes() {
+  try {
+    return JSON.parse(localStorage.getItem("nutrition_custom_recipes")) || [];
+  } catch {
+    return [];
+  }
+}
 
 // -------------------------------------------------------------
 // 4. Класс приложения
