@@ -790,26 +790,30 @@ class NutritionApp {
     const isSaved = this.user.savedRecipes.includes(recipe.id);
     const difficultyMap = { easy: "⭐", medium: "⭐⭐", hard: "⭐⭐⭐" };
 
+    // аккуратно формируем картинку / эмодзи
+    const imageHtml = recipe.imageUrl
+      ? `<img src="${recipe.imageUrl}" alt="${this.escapeHtml(
+          recipe.title
+        )}" class="recipe-photo" />`
+      : (recipe.photo || "🤖");
+
     return `
       <div class="recipe-card" onclick="app.showRecipeDetail('${recipe.id}')">
-        const imageHtml = recipe.imageUrl
-  ? `<img src="${recipe.imageUrl}" alt="${this.escapeHtml(recipe.title)}" class="recipe-photo" />`
-  : (recipe.photo || "🤖");
-
-return `
-  <div class="recipe-card" onclick="app.showRecipeDetail('${recipe.id}')">
-    <div class="recipe-image">
-      ${imageHtml}
-    </div>
-    ...
-`;
+        <div class="recipe-image">
+          ${imageHtml}
+        </div>
         <div class="recipe-content">
-          
-          ${recipe.visibility === "ai" ? '<span class="ai-badge">🤖 AI</span>' : ""}
+          ${
+            recipe.visibility === "ai"
+              ? '<span class="ai-badge">🤖 AI</span>'
+              : ""
+          }
 
           <div class="recipe-header">
             <div class="recipe-title">${recipe.title}</div>
-            <div class="recipe-author">${recipe.author || "AI-рецепт"}</div>
+            <div class="recipe-author">${
+              recipe.author || "AI-рецепт"
+            }</div>
           </div>
 
           <div class="recipe-kbju">
@@ -864,6 +868,7 @@ return `
       </div>
     `;
   }
+
 
   // -----------------------------------------------------------
   // Детальная карточка
