@@ -1209,6 +1209,122 @@ return `
       alert("Похожих рецептов нет — попробуйте другой!");
     }
   }
+  openCreateRecipe() {
+  // По желанию можно очищать форму при каждом заходе:
+  const fields = [
+    "cr-title",
+    "cr-cook-time",
+    "cr-kcal",
+    "cr-protein",
+    "cr-fat",
+    "cr-carbs",
+    "cr-ingredients",
+    "cr-steps"
+  ];
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = el.defaultValue || "";
+  });
+
+  const cat = document.getElementById("cr-category");
+  if (cat) cat.value = "breakfast";
+
+  const photo = document.getElementById("cr-photo");
+  if (photo) photo.value = "";
+
+  this.showScreen("create-recipe-screen");
+}
+
+saveCustomRecipe() {
+  const titleEl = document.getElementById("cr-title");
+  const catEl = document.getElementById("cr-category");
+  const timeEl = document.getElementById("cr-cook-time");
+  const kcalEl = document.getElementById("cr-kcal");
+  const pEl = document.getElementById("cr-protein");
+  const fEl = document.getElementById("cr-fat");
+  const cEl = document.getElementById("cr-carbs");
+  const ingEl = document.getElementById("cr-ingredients");
+  const stepsEl = document.getElementById("cr-steps");
+  const photoEl = document.getElementById("cr-photo");
+
+  const title = titleEl?.value.trim();
+  if (!title) {
+    alert("Введите название рецепта");
+    return;
+  }
+
+  const category = catEl?.value || "breakfast";
+  const cook_time = parseInt(timeEl?.value || "15", 10);
+
+  const kbju = {
+    kcal: parseInt(kcalEl?.value || "300", 10),
+    protein: parseInt(pEl?.value || "20", 10),
+    fat: parseInt(fEl?.value || "10", 10),
+    carbs: parseInt(cEl?.value || "25", 10)
+  };
+
+  const ingredients = (ingEl?.value || "")
+    .split("\n")
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  const steps = (stepsEl?.value || "")
+    .split("\n")
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  if (!ingredients.length) {
+    alert("Добавьте хотя бы один ингредиент");
+    return;
+  }
+  if (!steps.length) {
+    alert("Добавьте хотя бы один шаг");
+    return;
+  }
+
+  const baseRecipe = {
+    id: generateId(),
+    title,
+    author: "Мой рецепт",
+    category,
+    photo: "🍽️",
+    visibility: "mine",
+    cook_time,
+    difficulty: "easy",
+    office_friendly: false,
+    kbju,
+    servings: 1,
+    tags: ["мой рецепт"],
+    ingredients,
+    steps
+  };
+
+  const finalize = imageUrl => {
+    if (imageUrl) {
+      baseRecipe.imageUrl = imageUrl;
+    }
+    this.customRecipes.push(baseRecipe);
+    saveUserCustomRecipes(this.customRecipes);
+
+    // после сохранения показываем список "Мои рецепты"
+    this.recipeScope = "mine";
+    this.showScreen("recipes-screen");
+    this.renderAllRecipes();
+  };
+
+  const file = photoEl?.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = e => finalize(e.target.result);
+    reader.onerror = () => {
+      console.warn("Ошибка чтения файла, сохраняю без фото");
+      finalize(null);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    finalize(null);
+  }
+}
 
     // -----------------------------------------------------------
   // Ингредиенты — выбор и поиск
