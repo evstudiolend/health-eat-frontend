@@ -874,13 +874,14 @@ class NutritionApp {
   // Детальная карточка
   // -----------------------------------------------------------
 
-  getRecipeById(id) {
-    return (
-      this.catalogRecipes.find(r => String(r.id) === String(id)) ||
-      this.aiRecipes.find(r => String(r.id) === String(id)) ||
-      null
-    );
-  }
+ getRecipeById(id) {
+  return (
+    this.catalogRecipes.find(r => String(r.id) === String(id)) ||
+    this.aiRecipes.find(r => String(r.id) === String(id)) ||
+    this.customRecipes.find(r => String(r.id) === String(id)) ||
+    null
+  );
+}
 
   showRecipeDetail(recipeId) {
     const recipe = this.getRecipeById(recipeId);
