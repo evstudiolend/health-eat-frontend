@@ -149,7 +149,30 @@
         ➕ Добавить рецепт
     </button>
 </div>
-<!-- Create Recipe Screen -->
+                <div class="scope-selector" style="margin-bottom: 16px;">
+                    <button class="scope-btn" data-scope="curated" onclick="app.setRecipeScope('curated')">От редакции</button>
+                    <button class="scope-btn" data-scope="public" onclick="app.setRecipeScope('public')">Публичные</button>
+                    <button class="scope-btn" data-scope="mine" onclick="app.setRecipeScope('mine')">Мои</button>
+                </div>
+                
+                <div class="filters">
+                    <div class="filter-row">
+                        <span class="filter-tag" data-filter="all" onclick="app.setFilter('category', 'all')">Все</span>
+                        <span class="filter-tag" data-filter="breakfast" onclick="app.setFilter('category', 'breakfast')">Завтрак</span>
+                        <span class="filter-tag" data-filter="lunch" onclick="app.setFilter('category', 'lunch')">Обед</span>
+                        <span class="filter-tag" data-filter="dinner" onclick="app.setFilter('category', 'dinner')">Ужин</span>
+                        <span class="filter-tag" data-filter="snack" onclick="app.setFilter('category', 'snack')">Перекус</span>
+                    </div>
+                    <div class="filter-row">
+                        <span class="filter-tag" data-filter="quick" onclick="app.toggleQuickFilter()">⚡ ≤10 минут</span>
+                        <span class="filter-tag" data-filter="office" onclick="app.toggleOfficeFilter()">💼 Офис</span>
+                    </div>
+                </div>
+                
+                <div class="recipe-grid" id="all-recipes"></div>
+            </div>
+
+            <!-- Create Recipe Screen -->
 <div class="screen" id="create-recipe-screen">
     <div class="back-button" onclick="app.showScreen('recipes-screen')">← Назад</div>
     <h2>➕ Новый рецепт</h2>
@@ -223,29 +246,6 @@
         💾 Сохранить рецепт
     </button>
 </div>
-
-                <div class="scope-selector" style="margin-bottom: 16px;">
-                    <button class="scope-btn" data-scope="curated" onclick="app.setRecipeScope('curated')">От редакции</button>
-                    <button class="scope-btn" data-scope="public" onclick="app.setRecipeScope('public')">Публичные</button>
-                    <button class="scope-btn" data-scope="mine" onclick="app.setRecipeScope('mine')">Мои</button>
-                </div>
-                
-                <div class="filters">
-                    <div class="filter-row">
-                        <span class="filter-tag" data-filter="all" onclick="app.setFilter('category', 'all')">Все</span>
-                        <span class="filter-tag" data-filter="breakfast" onclick="app.setFilter('category', 'breakfast')">Завтрак</span>
-                        <span class="filter-tag" data-filter="lunch" onclick="app.setFilter('category', 'lunch')">Обед</span>
-                        <span class="filter-tag" data-filter="dinner" onclick="app.setFilter('category', 'dinner')">Ужин</span>
-                        <span class="filter-tag" data-filter="snack" onclick="app.setFilter('category', 'snack')">Перекус</span>
-                    </div>
-                    <div class="filter-row">
-                        <span class="filter-tag" data-filter="quick" onclick="app.toggleQuickFilter()">⚡ ≤10 минут</span>
-                        <span class="filter-tag" data-filter="office" onclick="app.toggleOfficeFilter()">💼 Офис</span>
-                    </div>
-                </div>
-                
-                <div class="recipe-grid" id="all-recipes"></div>
-            </div>
 
             <!-- Recipe Detail -->
             <div class="screen" id="recipe-detail-screen">
