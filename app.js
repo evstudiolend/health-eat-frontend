@@ -1703,6 +1703,53 @@ saveCustomRecipe() {
   this.renderMyRecipesSummary();
   this.renderGoalTips();
 }
+  toggleKbjuEdit() {
+  const form = document.getElementById("kbju-edit-form");
+  if (!form) return;
+
+  const isHidden = form.style.display === "none" || !form.style.display;
+  form.style.display = isHidden ? "block" : "none";
+
+  if (isHidden) {
+    document.getElementById("edit-kcal").value = this.user.target.kcal;
+    document.getElementById("edit-protein").value = this.user.target.protein;
+    document.getElementById("edit-fat").value = this.user.target.fat;
+    document.getElementById("edit-carbs").value = this.user.target.carbs;
+
+    ["edit-protein", "edit-fat", "edit-carbs"].forEach(id => {
+      const input = document.getElementById(id);
+      if (input && !input._kbjuBound) {
+        input.addEventListener("input", () => this.recalcKcalFromMacros());
+        input._kbjuBound = true;
+      }
+    });
+  }
+}
+
+recalcKcalFromMacros() {
+  const p = parseFloat(document.getElementById("edit-protein").value) || 0;
+  const f = parseFloat(document.getElementById("edit-fat").value) || 0;
+  const c = parseFloat(document.getElementById("edit-carbs").value) || 0;
+
+  const kcal = Math.round(p * 4 + c * 4 + f * 9); // формула → 1г Б = 4 ккал, 1г У = 4 ккал, 1г Ж = 9 ккал
+  const kcalInput = document.getElementById("edit-kcal");
+  if (kcalInput) kcalInput.value = kcal;
+}
+
+saveTargetKbju() {
+  const kcal = parseInt(document.getElementById("edit-kcal").value || "0", 10);
+  const p = parseInt(document.getElementById("edit-protein").value || "0", 10);
+  const f = parseInt(document.getElementById("edit-fat").value || "0", 10);
+  const c = parseInt(document.getElementById("edit-carbs").value || "0", 10);
+
+  this.user.target = { kcal, protein: p, fat: f, carbs: c };
+  saveUserState(this.user);
+
+  this.renderProfile();
+
+  const form = document.getElementById("kbju-edit-form");
+  if (form) form.style.display = "none";
+}
 renderGoalTips() {
   const tipsEl = document.getElementById("profile-goal-tips");
   if (!tipsEl) return;
