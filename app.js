@@ -480,14 +480,36 @@ class NutritionApp {
     const savedUser = loadUserState();
 
     this.user = savedUser || {
-      goal: "maintain",
-      target: { kcal: 1800, protein: 120, fat: 60, carbs: 160 },
-      savedRecipes: [],
-      shoppingList: [],
-      mood: 3,
-      daysUsing: 1,
-      backendUrl: API_BASE_DEFAULT
-    };
+  goal: "maintain",
+  target: { kcal: 1800, protein: 120, fat: 60, carbs: 160 },
+  savedRecipes: [],
+  shoppingList: [],
+  mood: 3,
+  daysUsing: 1,
+  backendUrl: API_BASE_DEFAULT,
+  name: "",
+  avatar: null,
+  ingredientStats: {}, // для любимых ингредиентов
+};
+    updateProfileName() {
+  const input = document.getElementById("profile-name");
+  if (!input) return;
+  this.user.name = input.value.trim();
+  saveUserState(this.user);
+}
+
+handleAvatarUpload(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    this.user.avatar = e.target.result; // DataURL
+    saveUserState(this.user);
+    this.renderProfile();
+  };
+  reader.readAsDataURL(file);
+}
 
     this.catalogRecipes = [...SAMPLE_RECIPES];
     this.aiRecipes = loadUserAIRecipes();
@@ -1624,36 +1646,63 @@ saveCustomRecipe() {
   }
 
   renderProfile() {
-    const goalMap = {
-      lose: "Снизить вес",
-      maintain: "Поддерживать вес",
-      gain: "Набрать массу"
-    };
+  const goalMap = {
+    lose: "Снизить вес",
+    maintain: "Поддерживать вес",
+    gain: "Набрать массу"
+  };
 
-    const goalEl = document.getElementById("profile-goal");
-    const kbjuEl = document.getElementById("profile-kbju");
-
-    if (goalEl) goalEl.textContent = goalMap[this.user.goal];
-    if (kbjuEl) {
-      kbjuEl.innerHTML = `
-        <div class="kbju-col">
-          <strong>${this.user.target.kcal}</strong><span>ккал</span>
-        </div>
-        <div class="kbju-col">
-          <strong>${this.user.target.protein}г</strong><span>Белки</span>
-        </div>
-        <div class="kbju-col">
-          <strong>${this.user.target.fat}г</strong><span>Жиры</span>
-        </div>
-        <div class="kbju-col">
-          <strong>${this.user.target.carbs}г</strong><span>Углеводы</span>
-        </div>
-      `;
-    }
-
-    this.setMood(this.user.mood);
-    this.loadBackendUrl();
+  // имя
+  const nameInput = document.getElementById("profile-name");
+  if (nameInput) {
+    nameInput.value = this.user.name || "";
   }
+
+  // аватар
+  const avatarDiv = document.getElementById("profile-avatar");
+  if (avatarDiv) {
+    if (this.user.avatar) {
+      avatarDiv.style.backgroundImage = `url(${this.user.avatar})`;
+      avatarDiv.style.backgroundSize = "cover";
+      avatarDiv.textContent = "";
+    } else {
+      avatarDiv.style.backgroundImage = "none";
+      avatarDiv.textContent = this.user.name
+        ? this.user.name[0].toUpperCase()
+        : "🙂";
+    }
+  }
+
+  // цель и КБЖУ как раньше
+  const goalEl = document.getElementById("profile-goal");
+  const kbjuEl = document.getElementById("profile-kbju");
+
+  if (goalEl) goalEl.textContent = goalMap[this.user.goal];
+  if (kbjuEl) {
+    kbjuEl.innerHTML = `
+      <div class="kbju-col">
+        <strong>${this.user.target.kcal}</strong><span>ккал</span>
+      </div>
+      <div class="kbju-col">
+        <strong>${this.user.target.protein}г</strong><span>Белки</span>
+      </div>
+      <div class="kbju-col">
+        <strong>${this.user.target.fat}г</strong><span>Жиры</span>
+      </div>
+      <div class="kbju-col">
+        <strong>${this.user.target.carbs}г</strong><span>Углеводы</span>
+      </div>
+    `;
+  }
+
+  this.setMood(this.user.mood);
+  this.loadBackendUrl();
+
+  // новые блоки:
+  this.renderFavoriteIngredients();
+  this.renderMyRecipesSummary();
+  this.renderGoalTips();
+}
 
   // -----------------------------------------------------------
   // Utility
