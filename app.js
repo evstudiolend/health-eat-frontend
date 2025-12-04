@@ -480,36 +480,17 @@ class NutritionApp {
     const savedUser = loadUserState();
 
     this.user = savedUser || {
-  goal: "maintain",
-  target: { kcal: 1800, protein: 120, fat: 60, carbs: 160 },
-  savedRecipes: [],
-  shoppingList: [],
-  mood: 3,
-  daysUsing: 1,
-  backendUrl: API_BASE_DEFAULT,
-  name: "",
-  avatar: null,
-  ingredientStats: {}, // для любимых ингредиентов
-};
-    updateProfileName() {
-  const input = document.getElementById("profile-name");
-  if (!input) return;
-  this.user.name = input.value.trim();
-  saveUserState(this.user);
-}
-
-handleAvatarUpload(event) {
-  const file = event.target.files?.[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = e => {
-    this.user.avatar = e.target.result; // DataURL
-    saveUserState(this.user);
-    this.renderProfile();
-  };
-  reader.readAsDataURL(file);
-}
+      goal: "maintain",
+      target: { kcal: 1800, protein: 120, fat: 60, carbs: 160 },
+      savedRecipes: [],
+      shoppingList: [],
+      mood: 3,
+      daysUsing: 1,
+      backendUrl: API_BASE_DEFAULT,
+      name: "",
+      avatar: null,
+      ingredientStats: {} // для любимых ингредиентов
+    };
 
     this.catalogRecipes = [...SAMPLE_RECIPES];
     this.aiRecipes = loadUserAIRecipes();
@@ -527,6 +508,29 @@ handleAvatarUpload(event) {
 
     this.init();
   }
+
+  // ========= методы профиля =========
+  updateProfileName() {
+    const input = document.getElementById("profile-name");
+    if (!input) return;
+    this.user.name = input.value.trim();
+    saveUserState(this.user);
+    this.renderProfile(); // чтобы сразу обновились инициалы/аватар
+  }
+
+  handleAvatarUpload(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = e => {
+      this.user.avatar = e.target.result; // DataURL
+      saveUserState(this.user);
+      this.renderProfile();
+    };
+    reader.readAsDataURL(file);
+  }
+
 
   // -----------------------------------------------------------
   // INIT
