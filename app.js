@@ -1703,6 +1703,27 @@ saveCustomRecipe() {
   this.renderMyRecipesSummary();
   this.renderGoalTips();
 }
+  renderGoalTips() {
+  const tipsEl = document.getElementById("profile-goal-tips");
+  if (!tipsEl) return;
+
+  let text = "";
+  switch (this.user.goal) {
+    case "lose":
+      text = "Фокус на дефиците ~10–20% от поддержки, больше белка и простые по составу блюда.";
+      break;
+    case "maintain":
+      text = "Сохраняйте баланс: достаточно белка, овощи в каждом приёме пищи, стабильное количество калорий.";
+      break;
+    case "gain":
+      text = "Лёгкий профицит калорий, акцент на белке и сложных углеводах, минимум пустых сладостей.";
+      break;
+    default:
+      text = "Подбирайте блюда под вашу цель — приложение поможет держать баланс.";
+  }
+
+  tipsEl.textContent = text;
+}
 
   // -----------------------------------------------------------
   // Utility
