@@ -141,36 +141,39 @@
                 <div class="recipe-grid" id="quick-recipes"></div>
             </div>
 
-            <!-- Recipes Screen -->
-            <div class="screen" id="recipes-screen">
-                <h2>📖 Рецепты</h2>
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
-    <button class="btn btn-secondary" onclick="app.openCreateRecipe()">
-        ➕ Добавить рецепт
-    </button>
+         <!-- Recipes Screen -->
+<div class="screen" id="recipes-screen">
+    <h2>📖 Рецепты</h2>
+
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+        <button class="btn btn-secondary" onclick="app.openCreateRecipe()">
+            ➕ Добавить рецепт
+        </button>
+    </div>
+
+    <div class="scope-selector" style="margin-bottom: 16px;">
+        <button class="scope-btn" data-scope="curated" onclick="app.setRecipeScope('curated')">От редакции</button>
+        <button class="scope-btn" data-scope="public" onclick="app.setRecipeScope('public')">Публичные</button>
+        <button class="scope-btn" data-scope="mine" onclick="app.setRecipeScope('mine')">Мои</button>
+    </div>
+
+    <div class="filters">
+        <div class="filter-row">
+            <span class="filter-tag" data-filter="all" onclick="app.setFilter('category','all')">Все</span>
+            <span class="filter-tag" data-filter="breakfast" onclick="app.setFilter('category','breakfast')">Завтрак</span>
+            <span class="filter-tag" data-filter="lunch" onclick="app.setFilter('category','lunch')">Обед</span>
+            <span class="filter-tag" data-filter="dinner" onclick="app.setFilter('category','dinner')">Ужин</span>
+            <span class="filter-tag" data-filter="snack" onclick="app.setFilter('category','snack')">Перекус</span>
+        </div>
+        <div class="filter-row">
+            <span class="filter-tag" data-filter="quick" onclick="app.toggleQuickFilter()">⚡ ≤10 минут</span>
+            <span class="filter-tag" data-filter="office" onclick="app.toggleOfficeFilter()">💼 Офис</span>
+        </div>
+    </div>
+
+    <div class="recipe-grid" id="all-recipes"></div>
 </div>
-                <div class="scope-selector" style="margin-bottom: 16px;">
-                    <button class="scope-btn" data-scope="curated" onclick="app.setRecipeScope('curated')">От редакции</button>
-                    <button class="scope-btn" data-scope="public" onclick="app.setRecipeScope('public')">Публичные</button>
-                    <button class="scope-btn" data-scope="mine" onclick="app.setRecipeScope('mine')">Мои</button>
-                </div>
-                
-                <div class="filters">
-                    <div class="filter-row">
-                        <span class="filter-tag" data-filter="all" onclick="app.setFilter('category', 'all')">Все</span>
-                        <span class="filter-tag" data-filter="breakfast" onclick="app.setFilter('category', 'breakfast')">Завтрак</span>
-                        <span class="filter-tag" data-filter="lunch" onclick="app.setFilter('category', 'lunch')">Обед</span>
-                        <span class="filter-tag" data-filter="dinner" onclick="app.setFilter('category', 'dinner')">Ужин</span>
-                        <span class="filter-tag" data-filter="snack" onclick="app.setFilter('category', 'snack')">Перекус</span>
-                    </div>
-                    <div class="filter-row">
-                        <span class="filter-tag" data-filter="quick" onclick="app.toggleQuickFilter()">⚡ ≤10 минут</span>
-                        <span class="filter-tag" data-filter="office" onclick="app.toggleOfficeFilter()">💼 Офис</span>
-                    </div>
-                </div>
-                
-                <div class="recipe-grid" id="all-recipes"></div>
-            </div>
+  
 
             <!-- Create Recipe Screen -->
 <div class="screen" id="create-recipe-screen">
@@ -201,6 +204,7 @@
     </div>
 
     <h3 style="margin-top: 20px;">КБЖУ на порцию</h3>
+
     <div class="kbju-inputs">
         <div class="input-group">
             <label>Калории</label>
@@ -222,30 +226,28 @@
 
     <div class="input-group">
         <label>Ингредиенты (по одному в строку)</label>
-        <textarea id="cr-ingredients" class="input-text" rows="6" placeholder="Творог 5% — 200 г
-Яйцо — 1 шт
-Рисовая мука — 30 г"></textarea>
+        <textarea id="cr-ingredients" class="input-text" rows="6"></textarea>
     </div>
 
     <div class="input-group">
         <label>Шаги приготовления (по одному в строку)</label>
-        <textarea id="cr-steps" class="input-text" rows="6" placeholder="Смешать все ингредиенты
-Разогреть сковороду
-Обжарить с двух сторон до готовности"></textarea>
+        <textarea id="cr-steps" class="input-text" rows="6"></textarea>
     </div>
 
     <div class="input-group">
         <label>Фото готового блюда</label>
         <input type="file" id="cr-photo" accept="image/*" />
-        <p style="color: var(--color-text-secondary); font-size: 12px; margin-top: 4px;">
-            Фото сохранится только на этом устройстве
+        <p style="color: var(--color-text-secondary); font-size: 12px;">
+            Фото сохраняется только на этом устройстве
         </p>
     </div>
 
-    <button class="btn btn-large" style="width: 100%; margin-top: 16px;" onclick="app.saveCustomRecipe()">
+    <button class="btn btn-large" style="width: 100%; margin-top: 16px;"
+            onclick="app.saveCustomRecipe()">
         💾 Сохранить рецепт
     </button>
 </div>
+
 
             <!-- Recipe Detail -->
             <div class="screen" id="recipe-detail-screen">
