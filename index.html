@@ -398,7 +398,41 @@
 
             <!-- Profile -->
             <div class="screen" id="profile-screen">
-                <h2>👤 Профиль</h2>
+    <h2>👤 Профиль</h2>
+
+    <!-- Блок аватара и имени -->
+    <div class="profile-section">
+        <div class="profile-header-row">
+            <div class="profile-avatar" id="profile-avatar">
+                <!-- сюда подставим либо картинку, либо эмодзи/инициал -->
+                🙂
+            </div>
+            <div class="profile-user-main">
+                <label for="profile-name" style="font-size: 13px; color: var(--color-text-secondary);">
+                    Имя
+                </label>
+                <input
+                    type="text"
+                    id="profile-name"
+                    class="input-text"
+                    placeholder="Как к вам обращаться?"
+                    onchange="app.updateProfileName()"
+                />
+                <div style="margin-top: 8px;">
+                    <label for="profile-avatar-file" class="link-label" style="font-size: 13px; cursor: pointer;">
+                        Загрузить фото
+                    </label>
+                    <input
+                        type="file"
+                        id="profile-avatar-file"
+                        accept="image/*"
+                        style="display:none;"
+                        onchange="app.handleAvatarUpload(event)"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
                 
                 <div class="profile-section">
                     <h3>Цель</h3>
