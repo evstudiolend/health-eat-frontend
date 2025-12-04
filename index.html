@@ -442,10 +442,44 @@
 </div>
 
                 
-                <div class="profile-section">
-                    <h3>Целевые показатели</h3>
-                    <div class="kbju-row" id="profile-kbju"></div>
-                </div>
+              <div class="profile-section">
+    <h3>Целевые показатели</h3>
+    <div class="kbju-row" id="profile-kbju"></div>
+
+    <button class="btn btn-secondary" style="margin-top: 12px;"
+            onclick="app.toggleKbjuEdit()">
+        Изменить КБЖУ
+    </button>
+
+    <div id="kbju-edit-form" style="display:none; margin-top: 12px;">
+        <div class="kbju-inputs">
+            <div class="input-group">
+                <label>Калории (ккал)</label>
+                <input type="number" id="edit-kcal" class="input-text" />
+            </div>
+            <div class="input-group">
+                <label>Белки (г)</label>
+                <input type="number" id="edit-protein" class="input-text" />
+            </div>
+            <div class="input-group">
+                <label>Жиры (г)</label>
+                <input type="number" id="edit-fat" class="input-text" />
+            </div>
+            <div class="input-group">
+                <label>Углеводы (г)</label>
+                <input type="number" id="edit-carbs" class="input-text" />
+            </div>
+        </div>
+        <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">
+            Калории пересчитываются автоматически из БЖУ (1 г Б/У = 4 ккал, 1 г Ж = 9 ккал).
+        </p>
+        <button class="btn" style="width: 100%; margin-top: 8px;"
+                onclick="app.saveTargetKbju()">
+            Сохранить
+        </button>
+    </div>
+</div>
+
                 
                 <div class="profile-section">
                     <h3>Backend Configuration</h3>
