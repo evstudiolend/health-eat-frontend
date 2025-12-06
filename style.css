@@ -1841,11 +1841,19 @@ h3 {
   font-family: 'FKGroteskNeue';
   src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
 }
-.profile-avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 999px; /* чтобы был круг */
-  display: block;
+#profile-avatar {
+  width: 140px;              /* размер круга */
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  margin: 0 auto 16px;       /* по центру и отступ снизу */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f7f7f7;
+  font-size: 40px;           /* размер смайлика/инициала, если нет фото */
 }
+
 
