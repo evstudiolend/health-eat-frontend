@@ -480,18 +480,33 @@ class NutritionApp {
     const savedUser = loadUserState();
 
     this.user = savedUser || {
-      goal: "maintain",
-      target: { kcal: 1800, protein: 120, fat: 60, carbs: 160 },
-      savedRecipes: [],
-      shoppingList: [],
-      mood: 3,
-      daysUsing: 1,
-      backendUrl: API_BASE_DEFAULT,
-      name: "",
-      avatar: null,
-      ingredientStats: {} // для любимых ингредиентов
-    };
+  goal: "maintain",
+  target: { kcal: 1800, protein: 120, fat: 60, carbs: 160 },
+  savedRecipes: [],
+  shoppingList: [],
+  mood: 3,
+  daysUsing: 1,
+  backendUrl: API_BASE_DEFAULT,
+  name: "",
+  avatar: null,
+  ingredientStats: {}, // для любимых ингредиентов
+  aiPrefs: {
+    cuisine: "",
+    maxTime: "",
+    level: "",
+    restrictions: []
+  }
+};
 
+// если старый пользователь без aiPrefs — добавим дефолты
+if (!this.user.aiPrefs) {
+  this.user.aiPrefs = {
+    cuisine: "",
+    maxTime: "",
+    level: "",
+    restrictions: []
+  };
+}
     this.catalogRecipes = [...SAMPLE_RECIPES];
     this.aiRecipes = loadUserAIRecipes();
     this.customRecipes = loadUserCustomRecipes();
@@ -1649,7 +1664,7 @@ saveCustomRecipe() {
     });
   }
 
-  renderProfile() {
+ renderProfile() {
   const goalMap = {
     lose: "Снизить вес",
     maintain: "Поддерживать вес",
@@ -1677,11 +1692,11 @@ saveCustomRecipe() {
     }
   }
 
-  // цель и КБЖУ как раньше
+  // цель и КБЖУ
   const goalEl = document.getElementById("profile-goal");
   const kbjuEl = document.getElementById("profile-kbju");
 
-  if (goalEl) goalEl.textContent = goalMap[this.user.goal];
+  if (goalEl) goalEl.textContent = goalMap[this.user.goal] || "Поддерживать вес";
   if (kbjuEl) {
     kbjuEl.innerHTML = `
       <div class="kbju-col">
@@ -1699,13 +1714,167 @@ saveCustomRecipe() {
     `;
   }
 
+  // настроение + backend URL
   this.setMood(this.user.mood);
   this.loadBackendUrl();
 
-  // новые блоки:
+  // применяем сохранённые настройки AI в форму
+  const prefs = this.user.aiPrefs || {};
+  const cuisineSel = document.getElementById("ai-pref-cuisine");
+  if (cuisineSel) cuisineSel.value = prefs.cuisine || "";
+
+  const timeSel = document.getElementById("ai-pref-time");
+  if (timeSel) timeSel.value = prefs.maxTime || "";
+
+  const levelSel = document.getElementById("ai-pref-level");
+  if (levelSel) levelSel.value = prefs.level || "";
+
+  const checks = document.querySelectorAll(
+    '#profile-screen input[type="checkbox"][value]'
+  );
+  checks.forEach(ch => {
+    ch.checked = Array.isArray(prefs.restrictions)
+      ? prefs.restrictions.includes(ch.value)
+      : false;
+  });
+
+  // новые блоки
   this.renderFavoriteIngredients();
   this.renderMyRecipesSummary();
   this.renderGoalTips();
+}
+  // --- Вспомогательный метод: расчёт любимых ингредиентов ---
+computeFavoriteIngredients() {
+  // Берём ваши собственные рецепты + сохранённые
+  const savedIds = new Set(this.user.savedRecipes || []);
+
+  const usedRecipes = this.getAllRecipesMerged().filter(
+    r => r.visibility === "mine" || savedIds.has(r.id)
+  );
+
+  const freq = {};
+
+  usedRecipes.forEach(r => {
+    (r.ingredients || []).forEach(ing => {
+      // Берём часть до тире/длинного тире: "Куриная грудка - 150г" → "Куриная грудка"
+      const base = ing.split("—")[0].split("-")[0].trim();
+      if (!base) return;
+
+      const key = base.toLowerCase();
+      if (!freq[key]) {
+        freq[key] = { count: 0, label: base };
+      }
+      freq[key].count += 1;
+    });
+  });
+
+  const sorted = Object.values(freq).sort((a, b) => b.count - a.count);
+  return sorted.slice(0, 3).map(item => item.label);
+}
+
+// --- Рендер блока "Любимые ингредиенты" ---
+renderFavoriteIngredients() {
+  const el = document.getElementById("favorite-ingredients-row");
+  if (!el) return;
+
+  const favorites = this.computeFavoriteIngredients();
+
+  if (!favorites.length) {
+    el.textContent =
+      "Пока рано судить — сохраняйте рецепты и добавляйте свои, чтобы увидеть любимые продукты 🙂";
+    return;
+  }
+
+  const emojis = ["🥚", "🍗", "🥒", "🥛", "🧀", "🥦", "🍅", "🥗", "🍳"];
+
+  const text = favorites
+    .map((name, i) => `${emojis[i] || "🥗"} ${name}`)
+    .join(", ");
+
+  el.textContent = `Вы часто используете: ${text}`;
+}
+
+// --- Рендер блока "Мои рецепты" ---
+renderMyRecipesSummary() {
+  const el = document.getElementById("my-recipes-summary");
+  if (!el) return;
+
+  const myCount = this.customRecipes.length;
+  const draftsCount = this.customRecipes.filter(r => r.isDraft).length;
+
+  if (!myCount && !draftsCount) {
+    el.textContent =
+      "Пока нет собственных рецептов — добавьте первый в разделе «Рецепты».";
+    return;
+  }
+
+  el.textContent = `❤️ ${myCount} ваших рецепта · 📌 ${draftsCount} черновик(а/ов)`;
+}
+
+// --- Переход к списку "Мои рецепты" ---
+goToMyRecipes() {
+  this.showScreen("recipes-screen");
+  this.setRecipeScope("mine");
+}
+
+// --- Показать рецепты с любимыми продуктами ---
+showRecipesWithFavoriteIngredients() {
+  const favorites = this.computeFavoriteIngredients();
+  if (!favorites.length) {
+    alert("Мы ещё не успели определить любимые продукты — сохраните несколько рецептов 🙂");
+    return;
+  }
+
+  this.showScreen("recipes-screen");
+  this.setRecipeScope("mine");
+
+  const all = this.getAllRecipesMerged().filter(r => {
+    const ingText = (r.ingredients || []).join(" ").toLowerCase();
+    return favorites.some(name =>
+      ingText.includes(name.toLowerCase())
+    );
+  });
+
+  const container = document.getElementById("all-recipes");
+  if (!container) return;
+
+  if (!all.length) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">😕</div>
+        <p>Нет рецептов с любимыми продуктами — попробуйте добавить ещё свои блюда.</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = all.map(r => this.renderRecipeCard(r)).join("");
+}
+
+// --- Обновление настроек AI ---
+updateAiPrefs() {
+  const prefs = this.user.aiPrefs || {
+    cuisine: "",
+    maxTime: "",
+    level: "",
+    restrictions: []
+  };
+
+  const cuisineSel = document.getElementById("ai-pref-cuisine");
+  const timeSel = document.getElementById("ai-pref-time");
+  const levelSel = document.getElementById("ai-pref-level");
+  const checks = document.querySelectorAll(
+    '#profile-screen input[type="checkbox"][value]'
+  );
+
+  prefs.cuisine = cuisineSel ? cuisineSel.value : "";
+  prefs.maxTime = timeSel ? timeSel.value : "";
+  prefs.level = levelSel ? levelSel.value : "";
+  prefs.restrictions = Array.from(checks)
+    .filter(ch => ch.checked)
+    .map(ch => ch.value);
+
+  this.user.aiPrefs = prefs;
+  saveUserState(this.user);
 }
   toggleKbjuEdit() {
   const form = document.getElementById("kbju-edit-form");
