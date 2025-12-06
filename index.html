@@ -481,7 +481,77 @@
         </button>
     </div>
 </div>
+<!-- Любимые ингредиенты -->
+<div class="profile-section">
+    <h3>Любимые ингредиенты</h3>
+    <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 8px;">
+        Мы смотрим, какие продукты чаще всего встречаются в ваших сохранённых и личных рецептах.
+    </p>
+    <div id="favorite-ingredients-row"
+         style="margin-bottom: 8px; font-size: 14px;"></div>
+    <button class="btn btn-secondary" style="width: 100%;"
+            onclick="app.showRecipesWithFavoriteIngredients()">
+        Показать рецепты с этими продуктами
+    </button>
+</div>
 
+<!-- Мои рецепты (быстрый доступ) -->
+<div class="profile-section">
+    <h3>Мои рецепты</h3>
+    <p id="my-recipes-summary" style="margin-bottom: 8px;"></p>
+    <button class="btn btn-secondary" style="width: 100%;"
+            onclick="app.goToMyRecipes()">
+        Перейти к списку →
+    </button>
+</div>
+                <!-- Настройки рекомендаций AI -->
+<div class="profile-section">
+    <h3>Настройки рекомендаций AI</h3>
+    <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 8px;">
+        Эти настройки будут учитываться при подборе рецептов.
+    </p>
+
+    <div class="input-group">
+        <label>Предпочитаемая кухня</label>
+        <select id="ai-pref-cuisine" class="input-text" onchange="app.updateAiPrefs()">
+            <option value="">Без предпочтений</option>
+            <option value="russian">Русская</option>
+            <option value="italian">Итальянская</option>
+            <option value="japanese">Японская</option>
+            <option value="mediterranean">Средиземноморская</option>
+            <option value="other">Другая</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label>Максимальное время приготовления</label>
+        <select id="ai-pref-time" class="input-text" onchange="app.updateAiPrefs()">
+            <option value="">Неважно</option>
+            <option value="10">До 10 минут</option>
+            <option value="20">До 20 минут</option>
+            <option value="40">До 40 минут</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label>Уровень готовки</label>
+        <select id="ai-pref-level" class="input-text" onchange="app.updateAiPrefs()">
+            <option value="">Неважно</option>
+            <option value="easy">Просто</option>
+            <option value="medium">Средний</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label>Пищевые ограничения</label>
+        <div class="checkbox-row" style="display:flex; flex-wrap:wrap; gap:8px; font-size:13px;">
+            <label><input type="checkbox" value="gluten_free" onchange="app.updateAiPrefs()"> без глютена</label>
+            <label><input type="checkbox" value="low_carb" onchange="app.updateAiPrefs()"> низкоуглеводное</label>
+            <label><input type="checkbox" value="dairy_free" onchange="app.updateAiPrefs()"> без молочного</label>
+            <label><input type="checkbox" value="vegan" onchange="app.updateAiPrefs()"> веган</label>
+        </div>
+    </div>
+</div>
                 
                 <div class="profile-section">
                     <h3>Backend Configuration</h3>
