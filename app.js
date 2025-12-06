@@ -524,24 +524,22 @@ if (!this.user.aiPrefs) {
     this.init();
   }
 
-  // ========= методы профиля =========
-  updateProfileName() {
-    const input = document.getElementById("profile-name");
-    if (!input) return;
-    this.user.name = input.value.trim();
-    saveUserState(this.user);
-    this.renderProfile(); // чтобы сразу обновились инициалы/аватар
-  }
-
   handleAvatarUpload(event) {
     const file = event.target.files && event.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onload = e => {
-      this.user.avatar = e.target.result; // DataURL
+      const dataUrl = e.target.result;
+      console.log("Avatar loaded, length:", dataUrl?.length);
+
+      this.user.avatar = dataUrl; // DataURL
       saveUserState(this.user);
       this.renderProfile();
+    };
+    reader.onerror = err => {
+      console.error("Avatar load error:", err);
+      alert("Не удалось загрузить фото, попробуйте другое изображение.");
     };
     reader.readAsDataURL(file);
   }
@@ -1677,18 +1675,20 @@ saveCustomRecipe() {
     nameInput.value = this.user.name || "";
   }
 
-  // аватар
+    // аватар
   const avatarDiv = document.getElementById("profile-avatar");
   if (avatarDiv) {
     if (this.user.avatar) {
-      avatarDiv.style.backgroundImage = `url(${this.user.avatar})`;
-      avatarDiv.style.backgroundSize = "cover";
-      avatarDiv.textContent = "";
-    } else {
+      // Рендерим картинку прямо внутрь
+      avatarDiv.innerHTML = `
+        <img src="${this.user.avatar}" alt="Аватар" class="profile-avatar-img" />
+      `;
       avatarDiv.style.backgroundImage = "none";
-      avatarDiv.textContent = this.user.name
+    } else {
+      avatarDiv.innerHTML = this.user.name
         ? this.user.name[0].toUpperCase()
         : "🙂";
+      avatarDiv.style.backgroundImage = "none";
     }
   }
 
