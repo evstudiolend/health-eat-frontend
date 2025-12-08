@@ -743,8 +743,6 @@ updateDashboardStats() {
     this.renderAllRecipes();
   }
 
-  }
-
   setRecipeScope(scope) {
     this.recipeScope = scope;
     document.querySelectorAll(".scope-btn").forEach(btn => {
