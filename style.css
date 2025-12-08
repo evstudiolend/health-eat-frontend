@@ -691,10 +691,29 @@ select.form-control {
 }
 
 .logo {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
-  letter-spacing: var(--letter-spacing-tight);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #4F46E5, #A78BFA);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+}
+
+.logo-text {
+  letter-spacing: -0.02em;
 }
 
 .main {
@@ -1754,3 +1773,84 @@ h3 {
   font-family: 'FKGroteskNeue';
   src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
 }
+.onboarding-subtitle {
+  max-width: 520px;
+  margin: 8px auto 24px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.onboarding-hero-card {
+  max-width: 560px;
+  margin: 0 auto 32px;
+  padding: 24px 24px 20px;
+  border-radius: 20px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-card-border);
+  text-align: left;
+}
+
+.onboarding-hero-card h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: 12px;
+}
+
+.onboarding-hero-card p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.onboarding-preview {
+  max-width: 560px;
+  margin: 0 auto 32px;
+  text-align: left;
+}
+
+.onboarding-preview h3 {
+  font-size: var(--font-size-md);
+  margin: 0 0 12px;
+  color: var(--color-text-secondary);
+}
+
+.onboarding-preview-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.onboarding-preview-list li {
+  display: flex;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--color-bg-2);
+}
+
+.preview-emoji {
+  font-size: 20px;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.onboarding-preview-list strong {
+  display: block;
+  font-size: var(--font-size-sm);
+  margin-bottom: 2px;
+}
+
+.onboarding-preview-list p {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.onboarding-actions {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
