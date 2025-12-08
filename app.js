@@ -479,13 +479,12 @@ class NutritionApp {
   constructor() {
     const savedUser = loadUserState();
 
-  this.user = savedUser || {
+this.user = savedUser || {
   goal: "maintain",
   target: { kcal: 1800, protein: 120, fat: 60, carbs: 160 },
   savedRecipes: [],
   shoppingList: [],
-  mood: 3,                          // одно текущее настроение оставляем
-  startDate: new Date().toISOString(), // <-- дата первого запуска
+  startDate: new Date().toISOString(),      // дата первого запуска
   backendUrl: API_BASE_DEFAULT,
   name: "",
   avatar: null,
@@ -1134,11 +1133,10 @@ updateDashboardStats() {
       const response = await fetch(`${this.user.backendUrl}/api/ai/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: text,
-          userKBJU: this.user.target,
-          mood: this.user.mood
-        })
+      body: JSON.stringify({
+  message: text,
+  userKBJU: this.user.target
+})
       });
 
       // удалить "думаю..."
@@ -1661,19 +1659,6 @@ saveCustomRecipe() {
     }, 1000);
   }
 
-  // -----------------------------------------------------------
-  // Профиль + настроение
-  // -----------------------------------------------------------
-
-  setMood(mood) {
-    this.user.mood = mood;
-    saveUserState(this.user);
-
-    document.querySelectorAll(".mood-btn").forEach(btn => {
-      btn.classList.toggle("selected", parseInt(btn.dataset.mood) === mood);
-    });
-  }
-
  renderProfile() {
   const goalMap = {
     lose: "Снизить вес",
@@ -1724,8 +1709,7 @@ if (avatarDiv) {
     `;
   }
 
-  // настроение + backend URL
-  this.setMood(this.user.mood);
+  // только backend URL
   this.loadBackendUrl();
 
   // применяем сохранённые настройки AI в форму
