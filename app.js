@@ -502,7 +502,32 @@ if (!this.user.startDate) {
   this.user.startDate = new Date().toISOString();
   saveUserState(this.user);
 }
+// Переключение источника рецептов: От редакции / Публичные / Мои
+setScope(scope) {
+  // запомним выбранный источник (если где-то используешь)
+  this.currentScope = scope;
 
+  // переключаем активный таб на главном экране
+  document.querySelectorAll('#dashboard-screen .scope-btn').forEach((btn) => {
+    const isActive = btn.dataset.scope === scope;
+    btn.classList.toggle('active', isActive);
+  });
+
+  // и те же табы на экране «Рецепты»
+  document.querySelectorAll('#recipes-screen .scope-btn').forEach((btn) => {
+    const isActive = btn.dataset.scope === scope;
+    btn.classList.toggle('active', isActive);
+  });
+
+  // перерисуем список рецептов, если есть соответствующий метод
+  if (typeof this.renderRecipes === 'function') {
+    this.renderRecipes();
+  } else if (typeof this.renderRecipesList === 'function') {
+    this.renderRecipesList();
+  } else if (typeof this.loadRecipes === 'function') {
+    this.loadRecipes();
+  }
+}
 // если старый пользователь без aiPrefs — добавим дефолты
 if (!this.user.aiPrefs) {
   this.user.aiPrefs = {
