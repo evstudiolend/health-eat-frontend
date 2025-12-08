@@ -729,14 +729,20 @@ updateDashboardStats() {
   // Scope (curated / ai / mine) + фильтры
   // -----------------------------------------------------------
 
-  setScope(scope) {
+   setScope(scope) {
+    // запоминаем выбранный источник
     this.recipeScope = scope;
+
+    // подсвечиваем все табы с .scope-btn (и на главной, и в "Рецептах")
     document.querySelectorAll(".scope-btn").forEach(btn => {
       btn.classList.toggle("active", btn.dataset.scope === scope);
     });
-    if (this.currentScreen === "recipes-screen") {
-      this.renderAllRecipes();
-    }
+
+    // сразу переходим в экран "Рецепты" и перерисовываем список
+    this.showScreen("recipes-screen");
+    this.renderAllRecipes();
+  }
+
   }
 
   setRecipeScope(scope) {
@@ -779,15 +785,16 @@ updateDashboardStats() {
   getFilteredRecipes() {
     let list = this.getAllRecipesMerged();
 
-    if (this.recipeScope === "curated") {
+       if (this.recipeScope === "curated") {
       list = list.filter(r => r.visibility === "curated");
-    } else if (this.recipeScope === "ai") {
+    } else if (this.recipeScope === "ai" || this.recipeScope === "public") {
+      // "Публичные" = AI-рецепты
       list = list.filter(r => r.visibility === "ai");
-   } else if (this.recipeScope === "mine") {
-  list = list.filter(
-    r => r.visibility === "mine" || this.user.savedRecipes.includes(r.id)
-  );
-}
+    } else if (this.recipeScope === "mine") {
+      list = list.filter(
+        r => r.visibility === "mine" || this.user.savedRecipes.includes(r.id)
+      );
+    }
 
 
     if (this.filters.category && this.filters.category !== "all") {
