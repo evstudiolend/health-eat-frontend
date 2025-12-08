@@ -1,49 +1,62 @@
+/* ===========================================================
+   HealthEat • Apple-like Light Tech Minimal UI
+   Полный style.css — можно вставлять вместо старого
+   =========================================================== */
+
+/* === DESIGN TOKENS =================================================== */
+
 :root {
-  /* Primitive Color Tokens */
-  --color-white: rgba(255, 255, 255, 1);
-  --color-black: rgba(0, 0, 0, 1);
-  --color-cream-50: rgba(252, 252, 249, 1);
-  --color-cream-100: rgba(255, 255, 253, 1);
-  --color-gray-200: rgba(245, 245, 245, 1);
-  --color-gray-300: rgba(167, 169, 169, 1);
-  --color-gray-400: rgba(119, 124, 124, 1);
-  --color-slate-500: rgba(98, 108, 113, 1);
-  --color-brown-600: rgba(94, 82, 64, 1);
-  --color-charcoal-700: rgba(31, 33, 33, 1);
-  --color-charcoal-800: rgba(38, 40, 40, 1);
-  --color-slate-900: rgba(19, 52, 59, 1);
-  --color-teal-300: rgba(50, 184, 198, 1);
-  --color-teal-400: rgba(45, 166, 178, 1);
-  --color-teal-500: rgba(33, 128, 141, 1);
-  --color-teal-600: rgba(29, 116, 128, 1);
-  --color-teal-700: rgba(26, 104, 115, 1);
-  --color-teal-800: rgba(41, 150, 161, 1);
-  --color-red-400: rgba(255, 84, 89, 1);
-  --color-red-500: rgba(192, 21, 47, 1);
-  --color-orange-400: rgba(230, 129, 97, 1);
-  --color-orange-500: rgba(168, 75, 47, 1);
+  /* === Primitive Color Tokens: Apple-like Light Tech === */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  /* Neutrals */
+  --color-cream-50: #F7F8FA;   /* Основной фон приложения */
+  --color-cream-100: #FFFFFF;  /* Карточки, поверхности */
+  --color-gray-200: #E4E7EC;
+  --color-gray-300: #D0D5DD;
+  --color-gray-400: #98A2B3;
+  --color-slate-500: #667085;  /* Вторичный текст */
+  --color-brown-600: #1F2937;  /* Нейтральный тёмный */
+  --color-charcoal-700: #0F172A;
+  --color-charcoal-800: #020617;
+  --color-slate-900: #101828;  /* Основной текст */
+
+  /* Primary (AI-фиолетовый, технологичный) */
+  --color-teal-300: #A78BFA;
+  --color-teal-400: #8B5CF6;
+  --color-teal-500: #4F46E5;
+  --color-teal-600: #4338CA;
+  --color-teal-700: #3730A3;
+  --color-teal-800: #312E81;
+
+  /* Дополнительные акценты */
+  --color-red-400: #F97066;
+  --color-red-500: #F04438;
+  --color-orange-400: #FDB022;
+  --color-orange-500: #F79009;
 
   /* RGB versions for opacity control */
-  --color-brown-600-rgb: 94, 82, 64;
-  --color-teal-500-rgb: 33, 128, 141;
-  --color-slate-900-rgb: 19, 52, 59;
-  --color-slate-500-rgb: 98, 108, 113;
-  --color-red-500-rgb: 192, 21, 47;
-  --color-red-400-rgb: 255, 84, 89;
-  --color-orange-500-rgb: 168, 75, 47;
-  --color-orange-400-rgb: 230, 129, 97;
+  --color-brown-600-rgb: 31, 41, 55;
+  --color-teal-500-rgb: 79, 70, 229;
+  --color-slate-900-rgb: 16, 24, 40;
+  --color-slate-500-rgb: 102, 112, 133;
+  --color-red-500-rgb: 240, 68, 56;
+  --color-red-400-rgb: 249, 112, 102;
+  --color-orange-500-rgb: 247, 144, 9;
+  --color-orange-400-rgb: 253, 176, 34;
 
-  /* Background color tokens (Light Mode) */
-  --color-bg-1: rgba(59, 130, 246, 0.08); /* Light blue */
-  --color-bg-2: rgba(245, 158, 11, 0.08); /* Light yellow */
-  --color-bg-3: rgba(34, 197, 94, 0.08); /* Light green */
-  --color-bg-4: rgba(239, 68, 68, 0.08); /* Light red */
-  --color-bg-5: rgba(147, 51, 234, 0.08); /* Light purple */
-  --color-bg-6: rgba(249, 115, 22, 0.08); /* Light orange */
-  --color-bg-7: rgba(236, 72, 153, 0.08); /* Light pink */
-  --color-bg-8: rgba(6, 182, 212, 0.08); /* Light cyan */
+  /* Мягкие цветные фоны для подложек */
+  --color-bg-1: rgba(79, 70, 229, 0.04);   /* Лёгкий фиолетовый */
+  --color-bg-2: rgba(167, 139, 250, 0.06); /* Светлый лавандовый */
+  --color-bg-3: rgba(16, 24, 40, 0.03);    /* Едва заметный тёмный */
+  --color-bg-4: rgba(240, 68, 56, 0.05);   /* Мягкий красный */
+  --color-bg-5: rgba(79, 70, 229, 0.06);   /* Под AI-элементы */
+  --color-bg-6: rgba(247, 144, 9, 0.05);   /* Мягкий оранжевый */
+  --color-bg-7: rgba(236, 72, 153, 0.05);  /* Нежный розовый */
+  --color-bg-8: rgba(6, 182, 212, 0.05);   /* Нежный циан */
 
-  /* Semantic Color Tokens (Light Mode) */
+  /* === Semantic Color Tokens (Light Mode) === */
   --color-background: var(--color-cream-50);
   --color-surface: var(--color-cream-100);
   --color-text: var(--color-slate-900);
@@ -51,53 +64,47 @@
   --color-primary: var(--color-teal-500);
   --color-primary-hover: var(--color-teal-600);
   --color-primary-active: var(--color-teal-700);
-  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
-  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
-  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
-  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
-  --color-btn-primary-text: var(--color-cream-50);
-  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
-  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.03);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.06);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.08);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.08);
+  --color-btn-primary-text: #FFFFFF;
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.04);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.06);
   --color-error: var(--color-red-500);
-  --color-success: var(--color-teal-500);
+  --color-success: #12B76A;
   --color-warning: var(--color-orange-500);
   --color-info: var(--color-slate-500);
-  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
-  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.25);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.7);
 
-  /* Common style patterns */
-  --focus-ring: 0 0 0 3px var(--color-focus-ring);
-  --focus-outline: 2px solid var(--color-primary);
-  --status-bg-opacity: 0.15;
-  --status-border-opacity: 0.25;
-  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  /* RGB versions for semantic */
+  --color-success-rgb: 18, 183, 106;
+  --color-error-rgb: var(--color-red-500-rgb);
+  --color-warning-rgb: var(--color-orange-500-rgb);
+  --color-info-rgb: var(--color-slate-500-rgb);
 
-  /* RGB versions for opacity control */
-  --color-success-rgb: 33, 128, 141;
-  --color-error-rgb: 192, 21, 47;
-  --color-warning-rgb: 168, 75, 47;
-  --color-info-rgb: 98, 108, 113;
+  /* Typography (Apple-like) */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
 
-  /* Typography */
-  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
-    Monaco, Consolas, monospace;
   --font-size-xs: 11px;
-  --font-size-sm: 12px;
-  --font-size-base: 14px;
-  --font-size-md: 14px;
-  --font-size-lg: 16px;
-  --font-size-xl: 18px;
-  --font-size-2xl: 20px;
+  --font-size-sm: 13px;
+  --font-size-base: 15px;
+  --font-size-md: 15px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 22px;
   --font-size-3xl: 24px;
-  --font-size-4xl: 30px;
+  --font-size-4xl: 28px;
+
   --font-weight-normal: 400;
   --font-weight-medium: 500;
-  --font-weight-semibold: 550;
-  --font-weight-bold: 600;
-  --line-height-tight: 1.2;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
   --line-height-normal: 1.5;
   --letter-spacing-tight: -0.01em;
 
@@ -115,22 +122,19 @@
   --space-24: 24px;
   --space-32: 32px;
 
-  /* Border Radius */
+  /* Border Radius — более крупные, “iOS” */
   --radius-sm: 6px;
-  --radius-base: 8px;
-  --radius-md: 10px;
-  --radius-lg: 12px;
+  --radius-base: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
-    0 2px 4px -1px rgba(0, 0, 0, 0.02);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
-    0 4px 6px -2px rgba(0, 0, 0, 0.02);
-  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+  /* Shadows — мягкие, дорогие */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.03);
+  --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 10px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 18px 40px rgba(15, 23, 42, 0.12);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.7);
 
   /* Animation */
   --duration-fast: 150ms;
@@ -142,134 +146,19 @@
   --container-md: 768px;
   --container-lg: 1024px;
   --container-xl: 1280px;
-}
 
-/* Dark mode colors */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* RGB versions for opacity control (Dark Mode) */
-    --color-gray-400-rgb: 119, 124, 124;
-    --color-teal-300-rgb: 50, 184, 198;
-    --color-gray-300-rgb: 167, 169, 169;
-    --color-gray-200-rgb: 245, 245, 245;
-
-    /* Background color tokens (Dark Mode) */
-    --color-bg-1: rgba(29, 78, 216, 0.15); /* Dark blue */
-    --color-bg-2: rgba(180, 83, 9, 0.15); /* Dark yellow */
-    --color-bg-3: rgba(21, 128, 61, 0.15); /* Dark green */
-    --color-bg-4: rgba(185, 28, 28, 0.15); /* Dark red */
-    --color-bg-5: rgba(107, 33, 168, 0.15); /* Dark purple */
-    --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
-    --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
-    --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
-
-    /* Semantic Color Tokens (Dark Mode) */
-    --color-background: var(--color-charcoal-700);
-    --color-surface: var(--color-charcoal-800);
-    --color-text: var(--color-gray-200);
-    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
-    --color-primary: var(--color-teal-300);
-    --color-primary-hover: var(--color-teal-400);
-    --color-primary-active: var(--color-teal-800);
-    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
-    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
-    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
-    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
-    --color-error: var(--color-red-400);
-    --color-success: var(--color-teal-300);
-    --color-warning: var(--color-orange-400);
-    --color-info: var(--color-gray-300);
-    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
-    --color-btn-primary-text: var(--color-slate-900);
-    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
-    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
-    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-    --button-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
-    --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
-    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
-
-    /* Common style patterns - updated for dark mode */
-    --focus-ring: 0 0 0 3px var(--color-focus-ring);
-    --focus-outline: 2px solid var(--color-primary);
-    --status-bg-opacity: 0.15;
-    --status-border-opacity: 0.25;
-    --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-
-    /* RGB versions for dark mode */
-    --color-success-rgb: var(--color-teal-300-rgb);
-    --color-error-rgb: var(--color-red-400-rgb);
-    --color-warning-rgb: var(--color-orange-400-rgb);
-    --color-info-rgb: var(--color-gray-300-rgb);
-  }
-}
-
-/* Data attribute for manual theme switching */
-[data-color-scheme="dark"] {
-  /* RGB versions for opacity control (dark mode) */
-  --color-gray-400-rgb: 119, 124, 124;
-  --color-teal-300-rgb: 50, 184, 198;
-  --color-gray-300-rgb: 167, 169, 169;
-  --color-gray-200-rgb: 245, 245, 245;
-
-  /* Colorful background palette - Dark Mode */
-  --color-bg-1: rgba(29, 78, 216, 0.15); /* Dark blue */
-  --color-bg-2: rgba(180, 83, 9, 0.15); /* Dark yellow */
-  --color-bg-3: rgba(21, 128, 61, 0.15); /* Dark green */
-  --color-bg-4: rgba(185, 28, 28, 0.15); /* Dark red */
-  --color-bg-5: rgba(107, 33, 168, 0.15); /* Dark purple */
-  --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
-  --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
-  --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
-
-  /* Semantic Color Tokens (Dark Mode) */
-  --color-background: var(--color-charcoal-700);
-  --color-surface: var(--color-charcoal-800);
-  --color-text: var(--color-gray-200);
-  --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
-  --color-primary: var(--color-teal-300);
-  --color-primary-hover: var(--color-teal-400);
-  --color-primary-active: var(--color-teal-800);
-  --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
-  --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
-  --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
-  --color-border: rgba(var(--color-gray-400-rgb), 0.3);
-  --color-error: var(--color-red-400);
-  --color-success: var(--color-teal-300);
-  --color-warning: var(--color-orange-400);
-  --color-info: var(--color-gray-300);
-  --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
-  --color-btn-primary-text: var(--color-slate-900);
-  --color-card-border: rgba(var(--color-gray-400-rgb), 0.15);
-  --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
-  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
-  --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
-  --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
-
-  /* Common style patterns - updated for dark mode */
+  /* Common style patterns */
   --focus-ring: 0 0 0 3px var(--color-focus-ring);
   --focus-outline: 2px solid var(--color-primary);
   --status-bg-opacity: 0.15;
   --status-border-opacity: 0.25;
+
   --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-
-  /* RGB versions for dark mode */
-  --color-success-rgb: var(--color-teal-300-rgb);
-  --color-error-rgb: var(--color-red-400-rgb);
-  --color-warning-rgb: var(--color-orange-400-rgb);
-  --color-info-rgb: var(--color-gray-300-rgb);
 }
 
+/* Явно светлая тема через data-атрибут */
 [data-color-scheme="light"] {
-  /* RGB versions for opacity control (light mode) */
-  --color-brown-600-rgb: 94, 82, 64;
-  --color-teal-500-rgb: 33, 128, 141;
-  --color-slate-900-rgb: 19, 52, 59;
-
-  /* Semantic Color Tokens (Light Mode) */
   --color-background: var(--color-cream-50);
   --color-surface: var(--color-cream-100);
   --color-text: var(--color-slate-900);
@@ -277,27 +166,106 @@
   --color-primary: var(--color-teal-500);
   --color-primary-hover: var(--color-teal-600);
   --color-primary-active: var(--color-teal-700);
-  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
-  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
-  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
-  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
-  --color-btn-primary-text: var(--color-cream-50);
-  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
-  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.03);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.06);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.08);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.08);
+  --color-btn-primary-text: #FFFFFF;
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.04);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.06);
   --color-error: var(--color-red-500);
-  --color-success: var(--color-teal-500);
+  --color-success: #12B76A;
   --color-warning: var(--color-orange-500);
   --color-info: var(--color-slate-500);
-  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
-
-  /* RGB versions for light mode */
-  --color-success-rgb: var(--color-teal-500-rgb);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.25);
+  --color-success-rgb: 18, 183, 106;
   --color-error-rgb: var(--color-red-500-rgb);
   --color-warning-rgb: var(--color-orange-500-rgb);
   --color-info-rgb: var(--color-slate-500-rgb);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.7);
 }
 
-/* Base styles */
+/* Dark mode через системные настройки */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #020617;
+    --color-surface: #020617;
+    --color-text: #E5E7EB;
+    --color-text-secondary: rgba(209, 213, 219, 0.8);
+    --color-primary: #A78BFA;
+    --color-primary-hover: #C4B5FD;
+    --color-primary-active: #8B5CF6;
+    --color-secondary: rgba(148, 163, 184, 0.16);
+    --color-secondary-hover: rgba(148, 163, 184, 0.26);
+    --color-secondary-active: rgba(148, 163, 184, 0.34);
+    --color-border: rgba(148, 163, 184, 0.35);
+    --color-card-border: rgba(15, 23, 42, 0.6);
+    --color-card-border-inner: rgba(15, 23, 42, 0.4);
+    --color-error: #FCA5A5;
+    --color-success: #4ADE80;
+    --color-warning: #FBBF24;
+    --color-info: #E5E7EB;
+    --color-success-rgb: 74, 222, 128;
+    --color-error-rgb: 252, 165, 165;
+    --color-warning-rgb: 251, 191, 36;
+    --color-info-rgb: 229, 231, 235;
+    --color-focus-ring: rgba(167, 139, 250, 0.4);
+    --color-btn-primary-text: #020617;
+    --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.4);
+    --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.6);
+    --shadow-md: 0 6px 18px rgba(15, 23, 42, 0.75);
+    --shadow-lg: 0 18px 45px rgba(15, 23, 42, 0.85);
+    --color-bg-1: rgba(79, 70, 229, 0.18);
+    --color-bg-2: rgba(167, 139, 250, 0.18);
+    --color-bg-3: rgba(15, 23, 42, 0.35);
+    --color-bg-4: rgba(239, 68, 68, 0.18);
+    --color-bg-5: rgba(79, 70, 229, 0.22);
+    --color-bg-6: rgba(247, 144, 9, 0.18);
+    --color-bg-7: rgba(236, 72, 153, 0.2);
+    --color-bg-8: rgba(6, 182, 212, 0.2);
+  }
+}
+
+/* Явно тёмная тема через data-атрибут */
+[data-color-scheme="dark"] {
+  --color-background: #020617;
+  --color-surface: #020617;
+  --color-text: #E5E7EB;
+  --color-text-secondary: rgba(209, 213, 219, 0.8);
+  --color-primary: #A78BFA;
+  --color-primary-hover: #C4B5FD;
+  --color-primary-active: #8B5CF6;
+  --color-secondary: rgba(148, 163, 184, 0.16);
+  --color-secondary-hover: rgba(148, 163, 184, 0.26);
+  --color-secondary-active: rgba(148, 163, 184, 0.34);
+  --color-border: rgba(148, 163, 184, 0.35);
+  --color-card-border: rgba(15, 23, 42, 0.6);
+  --color-card-border-inner: rgba(15, 23, 42, 0.4);
+  --color-error: #FCA5A5;
+  --color-success: #4ADE80;
+  --color-warning: #FBBF24;
+  --color-info: #E5E7EB;
+  --color-success-rgb: 74, 222, 128;
+  --color-error-rgb: 252, 165, 165;
+  --color-warning-rgb: 251, 191, 36;
+  --color-info-rgb: 229, 231, 235;
+  --color-focus-ring: rgba(167, 139, 250, 0.4);
+  --color-btn-primary-text: #020617;
+  --color-select-caret: rgba(229, 231, 235, 0.85);
+}
+
+/* ===========================================================
+   BASE STYLES
+   =========================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html {
   font-size: var(--font-size-base);
   font-family: var(--font-family-base);
@@ -305,18 +273,17 @@ html {
   color: var(--color-text);
   background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
+  font-family: var(--font-family-base);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+  font-size: var(--font-size-base);
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Typography */
@@ -333,24 +300,12 @@ h6 {
   letter-spacing: var(--letter-spacing-tight);
 }
 
-h1 {
-  font-size: var(--font-size-4xl);
-}
-h2 {
-  font-size: var(--font-size-3xl);
-}
-h3 {
-  font-size: var(--font-size-2xl);
-}
-h4 {
-  font-size: var(--font-size-xl);
-}
-h5 {
-  font-size: var(--font-size-lg);
-}
-h6 {
-  font-size: var(--font-size-md);
-}
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-md); }
 
 p {
   margin: 0 0 var(--space-16) 0;
@@ -390,21 +345,39 @@ pre code {
   padding: 0;
 }
 
-/* Buttons */
+/* ===========================================================
+   BUTTONS
+   =========================================================== */
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-8) var(--space-16);
-  border-radius: var(--radius-base);
+  padding: 0 var(--space-16);
+  min-height: 48px;
+  border-radius: 12px;
   font-size: var(--font-size-base);
-  font-weight: 500;
-  line-height: 1.5;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
   cursor: pointer;
-  transition: all var(--duration-normal) var(--ease-standard);
+  transition: transform var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard),
+              background-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
   border: none;
   text-decoration: none;
   position: relative;
+  box-shadow: var(--shadow-xs);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-xs);
 }
 
 .btn:focus-visible {
@@ -412,7 +385,9 @@ pre code {
   box-shadow: var(--focus-ring);
 }
 
-.btn--primary {
+/* Primary (фиолетовая) */
+.btn--primary,
+.btn:not(.btn--secondary):not(.btn--outline):not(.btn-secondary) {
   background: var(--color-primary);
   color: var(--color-btn-primary-text);
 }
@@ -425,39 +400,46 @@ pre code {
   background: var(--color-primary-active);
 }
 
-.btn--secondary {
+/* Secondary (заливка) */
+.btn--secondary,
+.btn-secondary {
   background: var(--color-secondary);
   color: var(--color-text);
+  box-shadow: none;
 }
 
-.btn--secondary:hover {
+.btn--secondary:hover,
+.btn-secondary:hover {
   background: var(--color-secondary-hover);
 }
 
-.btn--secondary:active {
-  background: var(--color-secondary-active);
-}
-
+/* Outline */
 .btn--outline {
   background: transparent;
   border: 1px solid var(--color-border);
   color: var(--color-text);
+  box-shadow: none;
 }
 
 .btn--outline:hover {
   background: var(--color-secondary);
 }
 
-.btn--sm {
-  padding: var(--space-4) var(--space-12);
+/* Size variants */
+.btn--sm,
+.btn-sm {
+  min-height: 38px;
+  padding: 0 var(--space-12);
   font-size: var(--font-size-sm);
-  border-radius: var(--radius-sm);
+  border-radius: 10px;
 }
 
-.btn--lg {
-  padding: var(--space-10) var(--space-20);
+.btn--lg,
+.btn-large {
+  min-height: 52px;
+  padding: 0 var(--space-24);
   font-size: var(--font-size-lg);
-  border-radius: var(--radius-md);
+  border-radius: 14px;
 }
 
 .btn--full-width {
@@ -467,13 +449,22 @@ pre code {
 .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
-/* Form elements */
+/* Dark outline tweak */
+[data-color-scheme="dark"] .btn--outline {
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+/* ===========================================================
+   FORMS
+   =========================================================== */
+
 .form-control {
   display: block;
   width: 100%;
-  padding: var(--space-8) var(--space-12);
+  padding: var(--space-10) var(--space-12);
   font-size: var(--font-size-md);
   line-height: 1.5;
   color: var(--color-text);
@@ -481,7 +472,8 @@ pre code {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-base);
   transition: border-color var(--duration-fast) var(--ease-standard),
-    box-shadow var(--duration-fast) var(--ease-standard);
+    box-shadow var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
 }
 
 textarea.form-control {
@@ -501,14 +493,13 @@ select.form-control {
   padding-right: var(--space-32);
 }
 
-/* Add a dark mode specific caret */
+/* caret for dark mode */
 @media (prefers-color-scheme: dark) {
   select.form-control {
     background-image: var(--select-caret-dark);
   }
 }
 
-/* Also handle data-color-scheme */
 [data-color-scheme="dark"] select.form-control {
   background-image: var(--select-caret-dark);
 }
@@ -519,7 +510,8 @@ select.form-control {
 
 .form-control:focus {
   border-color: var(--color-primary);
-  outline: var(--focus-outline);
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 .form-label {
@@ -533,31 +525,39 @@ select.form-control {
   margin-bottom: var(--space-16);
 }
 
-/* Card component */
+/* ===========================================================
+   CARD COMPONENT
+   =========================================================== */
+
 .card {
   background-color: var(--color-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-card-border);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  transition: box-shadow var(--duration-normal) var(--ease-standard);
+  transition: box-shadow var(--duration-normal) var(--ease-standard),
+              transform var(--duration-normal) var(--ease-standard);
 }
 
 .card:hover {
   box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .card__body {
-  padding: var(--space-16);
+  padding: var(--space-20);
 }
 
 .card__header,
 .card__footer {
-  padding: var(--space-16);
+  padding: var(--space-16) var(--space-20);
   border-bottom: 1px solid var(--color-card-border-inner);
 }
 
-/* Status indicators - simplified with CSS variables */
+/* ===========================================================
+   STATUS CHIPS
+   =========================================================== */
+
 .status {
   display: inline-flex;
   align-items: center;
@@ -568,46 +568,33 @@ select.form-control {
 }
 
 .status--success {
-  background-color: rgba(
-    var(--color-success-rgb, 33, 128, 141),
-    var(--status-bg-opacity)
-  );
+  background-color: rgba(var(--color-success-rgb), var(--status-bg-opacity));
   color: var(--color-success);
-  border: 1px solid
-    rgba(var(--color-success-rgb, 33, 128, 141), var(--status-border-opacity));
+  border: 1px solid rgba(var(--color-success-rgb), var(--status-border-opacity));
 }
 
 .status--error {
-  background-color: rgba(
-    var(--color-error-rgb, 192, 21, 47),
-    var(--status-bg-opacity)
-  );
+  background-color: rgba(var(--color-error-rgb), var(--status-bg-opacity));
   color: var(--color-error);
-  border: 1px solid
-    rgba(var(--color-error-rgb, 192, 21, 47), var(--status-border-opacity));
+  border: 1px solid rgba(var(--color-error-rgb), var(--status-border-opacity));
 }
 
 .status--warning {
-  background-color: rgba(
-    var(--color-warning-rgb, 168, 75, 47),
-    var(--status-bg-opacity)
-  );
+  background-color: rgba(var(--color-warning-rgb), var(--status-bg-opacity));
   color: var(--color-warning);
-  border: 1px solid
-    rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-border-opacity));
+  border: 1px solid rgba(var(--color-warning-rgb), var(--status-border-opacity));
 }
 
 .status--info {
-  background-color: rgba(
-    var(--color-info-rgb, 98, 108, 113),
-    var(--status-bg-opacity)
-  );
+  background-color: rgba(var(--color-info-rgb), var(--status-bg-opacity));
   color: var(--color-info);
-  border: 1px solid
-    rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));
+  border: 1px solid rgba(var(--color-info-rgb), var(--status-border-opacity));
 }
 
-/* Container layout */
+/* ===========================================================
+   LAYOUT / CONTAINER
+   =========================================================== */
+
 .container {
   width: 100%;
   margin-right: auto;
@@ -617,98 +604,46 @@ select.form-control {
 }
 
 @media (min-width: 640px) {
-  .container {
-    max-width: var(--container-sm);
-  }
+  .container { max-width: var(--container-sm); }
 }
 @media (min-width: 768px) {
-  .container {
-    max-width: var(--container-md);
-  }
+  .container { max-width: var(--container-md); }
 }
 @media (min-width: 1024px) {
-  .container {
-    max-width: var(--container-lg);
-  }
+  .container { max-width: var(--container-lg); }
 }
 @media (min-width: 1280px) {
-  .container {
-    max-width: var(--container-xl);
-  }
+  .container { max-width: var(--container-xl); }
 }
 
-/* Utility classes */
-.flex {
-  display: flex;
-}
-.flex-col {
-  flex-direction: column;
-}
-.items-center {
-  align-items: center;
-}
-.justify-center {
-  justify-content: center;
-}
-.justify-between {
-  justify-content: space-between;
-}
-.gap-4 {
-  gap: var(--space-4);
-}
-.gap-8 {
-  gap: var(--space-8);
-}
-.gap-16 {
-  gap: var(--space-16);
-}
+/* ===========================================================
+   UTILITIES
+   =========================================================== */
 
-.m-0 {
-  margin: 0;
-}
-.mt-8 {
-  margin-top: var(--space-8);
-}
-.mb-8 {
-  margin-bottom: var(--space-8);
-}
-.mx-8 {
-  margin-left: var(--space-8);
-  margin-right: var(--space-8);
-}
-.my-8 {
-  margin-top: var(--space-8);
-  margin-bottom: var(--space-8);
-}
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-4 { gap: var(--space-4); }
+.gap-8 { gap: var(--space-8); }
+.gap-16 { gap: var(--space-16); }
 
-.p-0 {
-  padding: 0;
-}
-.py-8 {
-  padding-top: var(--space-8);
-  padding-bottom: var(--space-8);
-}
-.px-8 {
-  padding-left: var(--space-8);
-  padding-right: var(--space-8);
-}
-.py-16 {
-  padding-top: var(--space-16);
-  padding-bottom: var(--space-16);
-}
-.px-16 {
-  padding-left: var(--space-16);
-  padding-right: var(--space-16);
-}
+.m-0 { margin: 0; }
+.mt-8 { margin-top: var(--space-8); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mx-8 { margin-left: var(--space-8); margin-right: var(--space-8); }
+.my-8 { margin-top: var(--space-8); margin-bottom: var(--space-8); }
 
-.block {
-  display: block;
-}
-.hidden {
-  display: none;
-}
+.p-0 { padding: 0; }
+.py-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+.px-8 { padding-left: var(--space-8); padding-right: var(--space-8); }
+.py-16 { padding-top: var(--space-16); padding-bottom: var(--space-16); }
+.px-16 { padding-left: var(--space-16); padding-right: var(--space-16); }
 
-/* Accessibility */
+.block { display: block; }
+.hidden { display: none; }
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -716,7 +651,7 @@ select.form-control {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip: rect(0,0,0,0);
   white-space: nowrap;
   border-width: 0;
 }
@@ -726,75 +661,9 @@ select.form-control {
   outline-offset: 2px;
 }
 
-/* Dark mode specifics */
-[data-color-scheme="dark"] .btn--outline {
-  border: 1px solid var(--color-border-secondary);
-}
-
-@font-face {
-  font-family: 'FKGroteskNeue';
-  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
-    format('woff2');
-}
-
-/* END PERPLEXITY DESIGN SYSTEM */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-gray-400-rgb: 119, 124, 124;
-    --color-teal-300-rgb: 50, 184, 198;
-    --color-gray-300-rgb: 167, 169, 169;
-    --color-gray-200-rgb: 245, 245, 245;
-
-    --color-bg-1: rgba(29, 78, 216, 0.15);
-    --color-bg-2: rgba(180, 83, 9, 0.15);
-    --color-bg-3: rgba(21, 128, 61, 0.15);
-    --color-bg-4: rgba(185, 28, 28, 0.15);
-    --color-bg-5: rgba(107, 33, 168, 0.15);
-    --color-bg-6: rgba(194, 65, 12, 0.15);
-    --color-bg-7: rgba(190, 24, 93, 0.15);
-    --color-bg-8: rgba(8, 145, 178, 0.15);
-
-    --color-background: var(--color-charcoal-700);
-    --color-surface: var(--color-charcoal-800);
-    --color-text: var(--color-gray-200);
-    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
-    --color-primary: var(--color-teal-300);
-    --color-primary-hover: var(--color-teal-400);
-    --color-primary-active: var(--color-teal-800);
-    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
-    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
-    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
-    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
-    --color-error: var(--color-red-400);
-    --color-success: var(--color-teal-300);
-    --color-warning: var(--color-orange-400);
-    --color-info: var(--color-gray-300);
-    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
-    --color-btn-primary-text: var(--color-slate-900);
-    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
-    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
-    --color-success-rgb: var(--color-teal-300-rgb);
-    --color-error-rgb: var(--color-red-400-rgb);
-    --color-warning-rgb: var(--color-orange-400-rgb);
-    --color-info-rgb: var(--color-gray-300-rgb);
-  }
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--font-family-base);
-  background-color: var(--color-background);
-  color: var(--color-text);
-  line-height: var(--line-height-normal);
-  font-size: var(--font-size-base);
-  -webkit-font-smoothing: antialiased;
-}
+/* ===========================================================
+   APP STRUCTURE / HEADER / MAIN
+   =========================================================== */
 
 .app {
   min-height: 100vh;
@@ -833,20 +702,19 @@ body {
   max-width: 800px;
   margin: 0 auto;
   width: 100%;
-  padding: var(--space-20);
+  padding: var(--space-24);
 }
 
-.screen {
-  display: none;
-}
+.screen { display: none; }
+.screen.active { display: block; }
 
-.screen.active {
-  display: block;
-}
+/* ===========================================================
+   ONBOARDING
+   =========================================================== */
 
 .onboarding {
   text-align: center;
-  padding: var(--space-32) var(--space-16);
+  padding: var(--space-32) var(--space-24);
 }
 
 .onboarding h1 {
@@ -874,6 +742,8 @@ body {
   margin-bottom: var(--space-12);
   color: var(--color-text);
 }
+
+/* Goals */
 
 .goal-buttons {
   display: flex;
@@ -904,6 +774,8 @@ body {
   border-color: var(--color-primary);
 }
 
+/* Kbju inputs */
+
 .kbju-inputs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -923,7 +795,8 @@ body {
   margin-bottom: var(--space-6);
 }
 
-.input-group input, .form-control {
+.input-group input,
+.form-control {
   width: 100%;
   padding: var(--space-10);
   border: 1px solid var(--color-border);
@@ -933,36 +806,14 @@ body {
   font-size: var(--font-size-base);
 }
 
-.input-group input:focus, .form-control:focus {
+.input-group input:focus,
+.form-control:focus {
   outline: none;
   border-color: var(--color-primary);
   box-shadow: var(--focus-ring);
 }
 
-.btn {
-  padding: var(--space-12) var(--space-24);
-  background: var(--color-primary);
-  color: var(--color-btn-primary-text);
-  border: none;
-  border-radius: var(--radius-base);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-standard);
-}
-
-.btn:hover {
-  background: var(--color-primary-hover);
-}
-
-.btn:active {
-  background: var(--color-primary-active);
-}
-
-.btn-large {
-  padding: var(--space-16) var(--space-32);
-  font-size: var(--font-size-lg);
-}
+/* Secondary button variations (legacy naming) */
 
 .btn-sm {
   padding: var(--space-8) var(--space-12);
@@ -970,14 +821,9 @@ body {
   flex: 1;
 }
 
-.btn-secondary {
-  background: var(--color-secondary);
-  color: var(--color-text);
-}
-
-.btn-secondary:hover {
-  background: var(--color-secondary-hover);
-}
+/* ===========================================================
+   SCOPE / CTA / STATS
+   =========================================================== */
 
 .scope-selector {
   display: flex;
@@ -1085,6 +931,10 @@ body {
   color: var(--color-text-secondary);
 }
 
+/* ===========================================================
+   FILTERS / RECIPE LIST
+   =========================================================== */
+
 .filters {
   display: flex;
   flex-direction: column;
@@ -1180,9 +1030,7 @@ body {
   font-size: var(--font-size-sm);
 }
 
-.kbju-item {
-  text-align: center;
-}
+.kbju-item { text-align: center; }
 
 .kbju-value {
   display: block;
@@ -1232,6 +1080,10 @@ body {
   gap: var(--space-8);
 }
 
+/* ===========================================================
+   RECIPE DETAIL
+   =========================================================== */
+
 .recipe-detail {
   max-width: 600px;
   margin: 0 auto;
@@ -1271,7 +1123,8 @@ body {
   margin-bottom: var(--space-20);
 }
 
-.ingredients-list, .steps-list {
+.ingredients-list,
+.steps-list {
   list-style: none;
   padding: 0;
 }
@@ -1320,6 +1173,10 @@ h3 {
   margin-top: var(--space-24);
   color: var(--color-text);
 }
+
+/* ===========================================================
+   SOS / BREATHING / SNACKS
+   =========================================================== */
 
 .sos-screen {
   text-align: center;
@@ -1384,6 +1241,10 @@ h3 {
   margin-bottom: var(--space-8);
 }
 
+/* ===========================================================
+   INGREDIENT CHIPS / KBJU TARGET
+   =========================================================== */
+
 .ingredient-chips {
   display: flex;
   flex-wrap: wrap;
@@ -1441,6 +1302,10 @@ h3 {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
 }
+
+/* ===========================================================
+   GUEST PLAN / SHOPPING LIST
+   =========================================================== */
 
 .guest-plan {
   background: var(--color-surface);
@@ -1538,6 +1403,10 @@ h3 {
   text-decoration: line-through;
 }
 
+/* ===========================================================
+   EMPTY STATES / PROFILE
+   =========================================================== */
+
 .empty-state {
   text-align: center;
   padding: var(--space-32);
@@ -1556,6 +1425,35 @@ h3 {
   padding: var(--space-24);
   margin-bottom: var(--space-20);
 }
+
+/* Аватар профиля */
+
+.profile-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+#profile-avatar {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  background-color: var(--color-bg-3);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ===========================================================
+   NAVIGATION / FAB
+   =========================================================== */
 
 .bottom-nav {
   position: fixed;
@@ -1621,14 +1519,9 @@ h3 {
   transform: scale(1.1);
 }
 
-.breathing-animation {
-  animation: breathe 4s ease-in-out infinite;
-}
-
-@keyframes breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
+/* ===========================================================
+   AI CHAT / MOOD / LOADING
+   =========================================================== */
 
 .ai-chat-container {
   background: var(--color-surface);
@@ -1780,6 +1673,8 @@ h3 {
   font-style: italic;
 }
 
+/* Error state */
+
 .error-state {
   padding: var(--space-20);
   background: rgba(var(--color-error-rgb), 0.1);
@@ -1810,61 +1705,52 @@ h3 {
   text-align: left;
 }
 
-.hidden {
-  display: none;
+/* ===========================================================
+   ANIMATIONS
+   =========================================================== */
+
+.breathing-animation {
+  animation: breathe 4s ease-in-out infinite;
 }
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* ===========================================================
+   RESPONSIVE
+   =========================================================== */
 
 @media (max-width: 640px) {
   .recipe-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .stats-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .cuisine-selector {
     grid-template-columns: 1fr;
   }
-  
+
   .mood-selector {
     gap: var(--space-6);
   }
-  
+
   .mood-btn {
     padding: var(--space-12);
     font-size: var(--font-size-2xl);
   }
+
+  .main {
+    padding: var(--space-20);
+  }
 }
 
+/* (опционально) шрифт FKGroteskNeue — если хочешь сохрани */
 @font-face {
   font-family: 'FKGroteskNeue';
   src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
 }
-.profile-avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-}
-#profile-avatar {
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  overflow: hidden;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 72px;
-  background-color: #f5f5f5;
-
-  /* ВАЖНО: эти три строки обеспечат «уместить всю картинку» */
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-
