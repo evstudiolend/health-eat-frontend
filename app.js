@@ -729,6 +729,16 @@ updateDashboardStats() {
   // Scope (curated / ai / mine) + фильтры
   // -----------------------------------------------------------
 
+  setScope(scope) {
+    this.recipeScope = scope;
+    document.querySelectorAll(".scope-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.scope === scope);
+    });
+    if (this.currentScreen === "recipes-screen") {
+      this.renderAllRecipes();
+    }
+  }
+
   setRecipeScope(scope) {
     this.recipeScope = scope;
     document.querySelectorAll(".scope-btn").forEach(btn => {
