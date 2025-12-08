@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Помощник по здоровому питанию</title>
+    <title>NutriGuide — умный гид по питанию</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app" id="app">
         <header class="header" id="header" style="display: none;">
             <div class="header-content">
-                <div class="logo">🥗 Здоровое Питание</div>
+                <div class="logo">
+                    <div class="logo-icon">N</div>
+                    <span class="logo-text">NutriGuide</span>
+                </div>
             </div>
         </header>
 
@@ -18,63 +21,86 @@
             <!-- Onboarding Screen -->
             <div class="screen active" id="onboarding-screen">
                 <div class="onboarding">
-                    <h1>Добро пожаловать! 👋</h1>
-                    <p style="color: var(--color-text-secondary); margin-bottom: 32px;">Ваш умный помощник по здоровому питанию</p>
-                    
-                    <div class="onboarding-steps">
-                        <div class="onboarding-step">
-                            <h3>💡 10-минутные идеи</h3>
-                            <p>Когда совсем нет времени</p>
-                        </div>
-                        
-                        <div class="onboarding-step">
-                            <h3>🎯 Подбери блюда под цель</h3>
-                            <p>Быстро и без калькуляторов</p>
-                        </div>
-                        
-                        <div class="onboarding-step">
-                            <h3>🆘 SOS при тяге к сладкому</h3>
-                            <p>3 минуты и отпустит</p>
-                        </div>
-                        
-                        <div class="onboarding-step">
-                            <h3>🍽️ Гости и рестораны</h3>
-                            <p>Без чувства вины и с удовольствием</p>
-                        </div>
+                    <h1>Добро пожаловать 👋</h1>
+                    <p class="onboarding-subtitle">
+                        NutriGuide — умный помощник по питанию, который подстраивается под ваш день и цели.
+                    </p>
+
+                    <div class="onboarding-hero-card">
+                        <h2>Сделаем питание предсказуемым и спокойным</h2>
+                        <p>
+                            Выберите цель и ориентировочный КБЖУ — дальше NutriGuide поможет с идеями, блюдами и планом,
+                            не перегружая вас цифрами.
+                        </p>
                     </div>
-                    
-                    <button class="btn btn-large" onclick="app.startGoalSelection()">Начать</button>
+
+                    <div class="onboarding-preview">
+                        <h3>Что вы получите внутри</h3>
+                        <ul class="onboarding-preview-list">
+                            <li>
+                                <span class="preview-emoji">💡</span>
+                                <div>
+                                    <strong>10-минутные идеи</strong>
+                                    <p>Когда совсем нет времени и сил думать, что поесть.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="preview-emoji">🎯</span>
+                                <div>
+                                    <strong>Блюда под вашу цель</strong>
+                                    <p>Подбор вариантов под ваш КБЖУ — без ручных калькуляторов.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="preview-emoji">🆘</span>
+                                <div>
+                                    <strong>SOS при тяге к сладкому</strong>
+                                    <p>Мини-сценарий на 3 минуты, чтобы пережить откат без срывов.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="preview-emoji">🍽️</span>
+                                <div>
+                                    <strong>Гости и рестораны</strong>
+                                    <p>Как поесть вкусно и без чувства вины в нестандартные дни.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="onboarding-actions">
+                        <button class="btn btn--primary btn--full-width" onclick="app.startGoalSelection()">Начать</button>
+                    </div>
                 </div>
             </div>
 
             <!-- Goal Selection -->
-<div class="screen" id="goal-screen">
-    <div class="onboarding">
-        <h1>Ваша цель?</h1>
-        <p style="color: var(--color-text-secondary); margin-bottom: 32px;">Выберите, что вам ближе всего</p>
-        
-        <div class="goal-buttons">
-            <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
-                <div style="font-size: 24px; margin-bottom: 8px;">📉</div>
-                <strong>Снизить вес</strong>
-                <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровое похудение</p>
-            </button>
-            
-            <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
-                <div style="font-size: 24px; margin-bottom: 8px;">⚖️</div>
-                <strong>Поддерживать вес</strong>
-                <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Сохранить текущую форму</p>
-            </button>
-            
-            <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
-                <div style="font-size: 24px; margin-bottom: 8px;">📈</div>
-                <strong>Набрать массу</strong>
-                <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровый набор веса</p>
-            </button>
-        </div>
-    </div>
-</div>
-
+            <div class="screen" id="goal-screen">
+                <div class="onboarding">
+                    <h1>Ваша цель?</h1>
+                    <p style="color: var(--color-text-secondary); margin-bottom: 32px;">Выберите, что вам ближе всего</p>
+                    
+                    <div class="goal-buttons">
+                        <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
+                            <div style="font-size: 24px; margin-bottom: 8px;">📉</div>
+                            <strong>Снизить вес</strong>
+                            <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровое похудение</p>
+                        </button>
+                        
+                        <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
+                            <div style="font-size: 24px; margin-bottom: 8px;">⚖️</div>
+                            <strong>Поддерживать вес</strong>
+                            <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Сохранить текущую форму</p>
+                        </button>
+                        
+                        <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
+                            <div style="font-size: 24px; margin-bottom: 8px;">📈</div>
+                            <strong>Набрать массу</strong>
+                            <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровый набор веса</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <!-- Dashboard -->
             <div class="screen" id="dashboard-screen">
@@ -124,130 +150,127 @@
                 <h2>⚡ Быстро сейчас</h2>
                 <p style="color: var(--color-text-secondary); margin-bottom: 24px;">Быстрые рецепты до 10 минут</p>
                 <div class="quick-input-box">
-    <input 
-        id="quick-user-query"
-        type="text"
-        class="input-text"
-        placeholder="Например: несладкое из творога, белковое, до 7 минут..."
-        style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #ddd;"
-    />
+                    <input 
+                        id="quick-user-query"
+                        type="text"
+                        class="input-text"
+                        placeholder="Например: несладкое из творога, белковое, до 7 минут..."
+                        style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #ddd;"
+                    />
 
-    <button class="btn btn-large" onclick="app.searchQuickCustom()" style="width: 100%;">
-        Найти быстрый рецепт
-    </button>
-</div>
-
+                    <button class="btn btn-large" onclick="app.searchQuickCustom()" style="width: 100%;">
+                        Найти быстрый рецепт
+                    </button>
+                </div>
                 
                 <div class="recipe-grid" id="quick-recipes"></div>
             </div>
 
-         <!-- Recipes Screen -->
-<div class="screen" id="recipes-screen">
-    <h2>📖 Рецепты</h2>
+            <!-- Recipes Screen -->
+            <div class="screen" id="recipes-screen">
+                <h2>📖 Рецепты</h2>
 
-    <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
-        <button class="btn btn-secondary" onclick="app.openCreateRecipe()">
-            ➕ Добавить рецепт
-        </button>
-    </div>
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+                    <button class="btn btn-secondary" onclick="app.openCreateRecipe()">
+                        ➕ Добавить рецепт
+                    </button>
+                </div>
 
-    <div class="scope-selector" style="margin-bottom: 16px;">
-        <button class="scope-btn" data-scope="curated" onclick="app.setRecipeScope('curated')">От редакции</button>
-        <button class="scope-btn" data-scope="public" onclick="app.setRecipeScope('public')">Публичные</button>
-        <button class="scope-btn" data-scope="mine" onclick="app.setRecipeScope('mine')">Мои</button>
-    </div>
+                <div class="scope-selector" style="margin-bottom: 16px;">
+                    <button class="scope-btn" data-scope="curated" onclick="app.setRecipeScope('curated')">От редакции</button>
+                    <button class="scope-btn" data-scope="public" onclick="app.setRecipeScope('public')">Публичные</button>
+                    <button class="scope-btn" data-scope="mine" onclick="app.setRecipeScope('mine')">Мои</button>
+                </div>
 
-    <div class="filters">
-        <div class="filter-row">
-            <span class="filter-tag" data-filter="all" onclick="app.setFilter('category','all')">Все</span>
-            <span class="filter-tag" data-filter="breakfast" onclick="app.setFilter('category','breakfast')">Завтрак</span>
-            <span class="filter-tag" data-filter="lunch" onclick="app.setFilter('category','lunch')">Обед</span>
-            <span class="filter-tag" data-filter="dinner" onclick="app.setFilter('category','dinner')">Ужин</span>
-            <span class="filter-tag" data-filter="snack" onclick="app.setFilter('category','snack')">Перекус</span>
-        </div>
-        <div class="filter-row">
-            <span class="filter-tag" data-filter="quick" onclick="app.toggleQuickFilter()">⚡ ≤10 минут</span>
-            <span class="filter-tag" data-filter="office" onclick="app.toggleOfficeFilter()">💼 Офис</span>
-        </div>
-    </div>
+                <div class="filters">
+                    <div class="filter-row">
+                        <span class="filter-tag" data-filter="all" onclick="app.setFilter('category','all')">Все</span>
+                        <span class="filter-tag" data-filter="breakfast" onclick="app.setFilter('category','breakfast')">Завтрак</span>
+                        <span class="filter-tag" data-filter="lunch" onclick="app.setFilter('category','lunch')">Обед</span>
+                        <span class="filter-tag" data-filter="dinner" onclick="app.setFilter('category','dinner')">Ужин</span>
+                        <span class="filter-tag" data-filter="snack" onclick="app.setFilter('category','snack')">Перекус</span>
+                    </div>
+                    <div class="filter-row">
+                        <span class="filter-tag" data-filter="quick" onclick="app.toggleQuickFilter()">⚡ ≤10 минут</span>
+                        <span class="filter-tag" data-filter="office" onclick="app.toggleOfficeFilter()">💼 Офис</span>
+                    </div>
+                </div>
 
-    <div class="recipe-grid" id="all-recipes"></div>
-</div>
+                <div class="recipe-grid" id="all-recipes"></div>
+            </div>
   
-
             <!-- Create Recipe Screen -->
-<div class="screen" id="create-recipe-screen">
-    <div class="back-button" onclick="app.showScreen('recipes-screen')">← Назад</div>
-    <h2>➕ Новый рецепт</h2>
-    <p style="color: var(--color-text-secondary); margin-bottom: 16px;">
-        Добавьте рецепт, который вы лично проверили
-    </p>
+            <div class="screen" id="create-recipe-screen">
+                <div class="back-button" onclick="app.showScreen('recipes-screen')">← Назад</div>
+                <h2>➕ Новый рецепт</h2>
+                <p style="color: var(--color-text-secondary); margin-bottom: 16px;">
+                    Добавьте рецепт, который вы лично проверили
+                </p>
 
-    <div class="input-group">
-        <label>Название блюда</label>
-        <input type="text" id="cr-title" class="input-text" placeholder="Например: Творожные оладьи без сахара" />
-    </div>
+                <div class="input-group">
+                    <label>Название блюда</label>
+                    <input type="text" id="cr-title" class="input-text" placeholder="Например: Творожные оладьи без сахара" />
+                </div>
 
-    <div class="input-group">
-        <label>Категория</label>
-        <select id="cr-category" class="input-text">
-            <option value="breakfast">Завтрак</option>
-            <option value="lunch">Обед</option>
-            <option value="dinner">Ужин</option>
-            <option value="snack">Перекус</option>
-        </select>
-    </div>
+                <div class="input-group">
+                    <label>Категория</label>
+                    <select id="cr-category" class="input-text">
+                        <option value="breakfast">Завтрак</option>
+                        <option value="lunch">Обед</option>
+                        <option value="dinner">Ужин</option>
+                        <option value="snack">Перекус</option>
+                    </select>
+                </div>
 
-    <div class="input-group">
-        <label>Время приготовления (мин)</label>
-        <input type="number" id="cr-cook-time" class="input-text" value="15" />
-    </div>
+                <div class="input-group">
+                    <label>Время приготовления (мин)</label>
+                    <input type="number" id="cr-cook-time" class="input-text" value="15" />
+                </div>
 
-    <h3 style="margin-top: 20px;">КБЖУ на порцию</h3>
+                <h3 style="margin-top: 20px;">КБЖУ на порцию</h3>
 
-    <div class="kbju-inputs">
-        <div class="input-group">
-            <label>Калории</label>
-            <input type="number" id="cr-kcal" class="input-text" value="300" />
-        </div>
-        <div class="input-group">
-            <label>Белки (г)</label>
-            <input type="number" id="cr-protein" class="input-text" value="20" />
-        </div>
-        <div class="input-group">
-            <label>Жиры (г)</label>
-            <input type="number" id="cr-fat" class="input-text" value="10" />
-        </div>
-        <div class="input-group">
-            <label>Углеводы (г)</label>
-            <input type="number" id="cr-carbs" class="input-text" value="25" />
-        </div>
-    </div>
+                <div class="kbju-inputs">
+                    <div class="input-group">
+                        <label>Калории</label>
+                        <input type="number" id="cr-kcal" class="input-text" value="300" />
+                    </div>
+                    <div class="input-group">
+                        <label>Белки (г)</label>
+                        <input type="number" id="cr-protein" class="input-text" value="20" />
+                    </div>
+                    <div class="input-group">
+                        <label>Жиры (г)</label>
+                        <input type="number" id="cr-fat" class="input-text" value="10" />
+                    </div>
+                    <div class="input-group">
+                        <label>Углеводы (г)</label>
+                        <input type="number" id="cr-carbs" class="input-text" value="25" />
+                    </div>
+                </div>
 
-    <div class="input-group">
-        <label>Ингредиенты (по одному в строку)</label>
-        <textarea id="cr-ingredients" class="input-text" rows="6"></textarea>
-    </div>
+                <div class="input-group">
+                    <label>Ингредиенты (по одному в строку)</label>
+                    <textarea id="cr-ingredients" class="input-text" rows="6"></textarea>
+                </div>
 
-    <div class="input-group">
-        <label>Шаги приготовления (по одному в строку)</label>
-        <textarea id="cr-steps" class="input-text" rows="6"></textarea>
-    </div>
+                <div class="input-group">
+                    <label>Шаги приготовления (по одному в строку)</label>
+                    <textarea id="cr-steps" class="input-text" rows="6"></textarea>
+                </div>
 
-    <div class="input-group">
-        <label>Фото готового блюда</label>
-        <input type="file" id="cr-photo" accept="image/*" />
-        <p style="color: var(--color-text-secondary); font-size: 12px;">
-            Фото сохраняется только на этом устройстве
-        </p>
-    </div>
+                <div class="input-group">
+                    <label>Фото готового блюда</label>
+                    <input type="file" id="cr-photo" accept="image/*" />
+                    <p style="color: var(--color-text-secondary); font-size: 12px;">
+                        Фото сохраняется только на этом устройстве
+                    </p>
+                </div>
 
-    <button class="btn btn-large" style="width: 100%; margin-top: 16px;"
-            onclick="app.saveCustomRecipe()">
-        💾 Сохранить рецепт
-    </button>
-</div>
-
+                <button class="btn btn-large" style="width: 100%; margin-top: 16px;"
+                        onclick="app.saveCustomRecipe()">
+                    💾 Сохранить рецепт
+                </button>
+            </div>
 
             <!-- Recipe Detail -->
             <div class="screen" id="recipe-detail-screen">
@@ -265,21 +288,21 @@
                 
                 <div class="ingredient-chips" id="ingredient-chips"></div>
             
-<!-- ✨ Новое поле ввода -->
-<div class="input-row" style="margin-top: 16px; margin-bottom: 12px;">
-  <input 
-    id="manual-ingredient-input"
-    type="text"
-    class="input-text"
-    placeholder="Например: куриная грудка, брокколи, сыр..."
-    onkeydown="if(event.key==='Enter'){ app.addManualIngredient(); }"
-    style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd;"
-  />
-</div>
+                <!-- Новое поле ввода -->
+                <div class="input-row" style="margin-top: 16px; margin-bottom: 12px;">
+                    <input 
+                        id="manual-ingredient-input"
+                        type="text"
+                        class="input-text"
+                        placeholder="Например: куриная грудка, брокколи, сыр..."
+                        onkeydown="if(event.key==='Enter'){ app.addManualIngredient(); }"
+                        style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd;"
+                    />
+                </div>
 
-<button class="btn btn-large" onclick="app.searchByIngredients()" style="width: 100%; margin-bottom: 12px;">
-  Найти рецепты
-</button>
+                <button class="btn btn-large" onclick="app.searchByIngredients()" style="width: 100%; margin-bottom: 12px;">
+                    Найти рецепты
+                </button>
                 
                 <div class="recipe-grid" id="pantry-recipes"></div>
             </div>
@@ -289,19 +312,18 @@
                 <div class="back-button" onclick="app.showScreen('dashboard-screen')">← Назад</div>
                 <h2>🎯 Подбор под КБЖУ</h2>
                 <div class="kbju-search-box">
-    <input 
-        id="kbju-user-query"
-        type="text"
-        class="input-text"
-        placeholder="Например: осталось 350 ккал, нужно белковое, мало жиров..."
-        style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #ddd;"
-    />
+                    <input 
+                        id="kbju-user-query"
+                        type="text"
+                        class="input-text"
+                        placeholder="Например: осталось 350 ккал, нужно белковое, мало жиров..."
+                        style="width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 12px; border: 1px solid #ddd;"
+                    />
 
-    <button class="btn btn-large" onclick="app.searchStrictKbjuCustom()" style="width: 100%;">
-        Найти варианты
-    </button>
-</div>
-
+                    <button class="btn btn-large" onclick="app.searchStrictKbjuCustom()" style="width: 100%;">
+                        Найти варианты
+                    </button>
+                </div>
                 
                 <div class="kbju-target">
                     <h3 style="margin-top: 0;">Ваша цель на день</h3>
@@ -400,165 +422,165 @@
 
             <!-- Profile -->
             <div class="screen" id="profile-screen">
-    <h2>👤 Профиль</h2>
+                <h2>👤 Профиль</h2>
 
-    <!-- Блок аватара и имени -->
-    <div class="profile-section">
-        <div class="profile-header-row">
-            <div class="profile-avatar" id="profile-avatar">
-                <!-- сюда подставим либо картинку, либо эмодзи/инициал -->
-                🙂
-            </div>
-            <div class="profile-user-main">
-                <label for="profile-name" style="font-size: 13px; color: var(--color-text-secondary);">
-                    Имя
-                </label>
-                <input
-                    type="text"
-                    id="profile-name"
-                    class="input-text"
-                    placeholder="Как к вам обращаться?"
-                    onchange="app.updateProfileName()"
-                />
-                <div style="margin-top: 8px;">
-                    <label for="profile-avatar-file" class="link-label" style="font-size: 13px; cursor: pointer;">
-                        Загрузить фото
-                    </label>
-                    <input
-                        type="file"
-                        id="profile-avatar-file"
-                        accept="image/*"
-                        style="display:none;"
-                        onchange="app.handleAvatarUpload(event)"
-                    />
+                <!-- Блок аватара и имени -->
+                <div class="profile-section">
+                    <div class="profile-header-row">
+                        <div class="profile-avatar" id="profile-avatar">
+                            🙂
+                        </div>
+                        <div class="profile-user-main">
+                            <label for="profile-name" style="font-size: 13px; color: var(--color-text-secondary);">
+                                Имя
+                            </label>
+                            <input
+                                type="text"
+                                id="profile-name"
+                                class="input-text"
+                                placeholder="Как к вам обращаться?"
+                                onchange="app.updateProfileName()"
+                            />
+                            <div style="margin-top: 8px;">
+                                <label for="profile-avatar-file" class="link-label" style="font-size: 13px; cursor: pointer;">
+                                    Загрузить фото
+                                </label>
+                                <input
+                                    type="file"
+                                    id="profile-avatar-file"
+                                    accept="image/*"
+                                    style="display:none;"
+                                    onchange="app.handleAvatarUpload(event)"
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
                 
                 <div class="profile-section">
-    <h3>Цель</h3>
-    <p id="profile-goal">Поддерживать вес</p>
-    <p id="profile-goal-tips"
-       style="color: var(--color-text-secondary); font-size: 13px; margin-top: 4px;"></p>
-</div>
+                    <h3>Цель</h3>
+                    <p id="profile-goal">Поддерживать вес</p>
+                    <p id="profile-goal-tips"
+                       style="color: var(--color-text-secondary); font-size: 13px; margin-top: 4px;"></p>
+                </div>
 
-                
-              <div class="profile-section">
-    <h3>Целевые показатели</h3>
-    <div class="kbju-row" id="profile-kbju"></div>
+                <div class="profile-section">
+                    <h3>Целевые показатели</h3>
+                    <div class="kbju-row" id="profile-kbju"></div>
 
-    <button class="btn btn-secondary" style="margin-top: 12px;"
-            onclick="app.toggleKbjuEdit()">
-        Изменить КБЖУ
-    </button>
+                    <button class="btn btn-secondary" style="margin-top: 12px;"
+                            onclick="app.toggleKbjuEdit()">
+                        Изменить КБЖУ
+                    </button>
 
-    <div id="kbju-edit-form" style="display:none; margin-top: 12px;">
-        <div class="kbju-inputs">
-            <div class="input-group">
-                <label>Калории (ккал)</label>
-                <input type="number" id="edit-kcal" class="input-text" />
-            </div>
-            <div class="input-group">
-                <label>Белки (г)</label>
-                <input type="number" id="edit-protein" class="input-text" />
-            </div>
-            <div class="input-group">
-                <label>Жиры (г)</label>
-                <input type="number" id="edit-fat" class="input-text" />
-            </div>
-            <div class="input-group">
-                <label>Углеводы (г)</label>
-                <input type="number" id="edit-carbs" class="input-text" />
-            </div>
-        </div>
-        <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">
-            Калории пересчитываются автоматически из БЖУ (1 г Б/У = 4 ккал, 1 г Ж = 9 ккал).
-        </p>
-        <button class="btn" style="width: 100%; margin-top: 8px;"
-                onclick="app.saveTargetKbju()">
-            Сохранить
-        </button>
-    </div>
-</div>
-<!-- Любимые ингредиенты -->
-<div class="profile-section">
-    <h3>Любимые ингредиенты</h3>
-    <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 8px;">
-        Мы смотрим, какие продукты чаще всего встречаются в ваших сохранённых и личных рецептах.
-    </p>
-    <div id="favorite-ingredients-row"
-         style="margin-bottom: 8px; font-size: 14px;"></div>
-    <button class="btn btn-secondary" style="width: 100%;"
-            onclick="app.showRecipesWithFavoriteIngredients()">
-        Показать рецепты с этими продуктами
-    </button>
-</div>
+                    <div id="kbju-edit-form" style="display:none; margin-top: 12px;">
+                        <div class="kbju-inputs">
+                            <div class="input-group">
+                                <label>Калории (ккал)</label>
+                                <input type="number" id="edit-kcal" class="input-text" />
+                            </div>
+                            <div class="input-group">
+                                <label>Белки (г)</label>
+                                <input type="number" id="edit-protein" class="input-text" />
+                            </div>
+                            <div class="input-group">
+                                <label>Жиры (г)</label>
+                                <input type="number" id="edit-fat" class="input-text" />
+                            </div>
+                            <div class="input-group">
+                                <label>Углеводы (г)</label>
+                                <input type="number" id="edit-carbs" class="input-text" />
+                            </div>
+                        </div>
+                        <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">
+                            Калории пересчитываются автоматически из БЖУ (1 г Б/У = 4 ккал, 1 г Ж = 9 ккал).
+                        </p>
+                        <button class="btn" style="width: 100%; margin-top: 8px;"
+                                onclick="app.saveTargetKbju()">
+                            Сохранить
+                        </button>
+                    </div>
+                </div>
 
-<!-- Мои рецепты (быстрый доступ) -->
-<div class="profile-section">
-    <h3>Мои рецепты</h3>
-    <p id="my-recipes-summary" style="margin-bottom: 8px;"></p>
-    <button class="btn btn-secondary" style="width: 100%;"
-            onclick="app.goToMyRecipes()">
-        Перейти к списку →
-    </button>
-</div>
+                <!-- Любимые ингредиенты -->
+                <div class="profile-section">
+                    <h3>Любимые ингредиенты</h3>
+                    <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 8px;">
+                        Мы смотрим, какие продукты чаще всего встречаются в ваших сохранённых и личных рецептах.
+                    </p>
+                    <div id="favorite-ingredients-row"
+                         style="margin-bottom: 8px; font-size: 14px;"></div>
+                    <button class="btn btn-secondary" style="width: 100%;"
+                            onclick="app.showRecipesWithFavoriteIngredients()">
+                        Показать рецепты с этими продуктами
+                    </button>
+                </div>
+
+                <!-- Мои рецепты (быстрый доступ) -->
+                <div class="profile-section">
+                    <h3>Мои рецепты</h3>
+                    <p id="my-recipes-summary" style="margin-bottom: 8px;"></p>
+                    <button class="btn btn-secondary" style="width: 100%;"
+                            onclick="app.goToMyRecipes()">
+                        Перейти к списку →
+                    </button>
+                </div>
+
                 <!-- Настройки рекомендаций AI -->
-<div class="profile-section">
-    <h3>Настройки рекомендаций AI</h3>
-    <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 8px;">
-        Эти настройки будут учитываться при подборе рецептов.
-    </p>
+                <div class="profile-section">
+                    <h3>Настройки рекомендаций AI</h3>
+                    <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 8px;">
+                        Эти настройки будут учитываться при подборе рецептов.
+                    </p>
 
-    <div class="input-group">
-        <label>Предпочитаемая кухня</label>
-        <select id="ai-pref-cuisine" class="input-text" onchange="app.updateAiPrefs()">
-            <option value="">Без предпочтений</option>
-            <option value="russian">Русская</option>
-            <option value="italian">Итальянская</option>
-            <option value="japanese">Японская</option>
-            <option value="mediterranean">Средиземноморская</option>
-            <option value="other">Другая</option>
-        </select>
-    </div>
+                    <div class="input-group">
+                        <label>Предпочитаемая кухня</label>
+                        <select id="ai-pref-cuisine" class="input-text" onchange="app.updateAiPrefs()">
+                            <option value="">Без предпочтений</option>
+                            <option value="russian">Русская</option>
+                            <option value="italian">Итальянская</option>
+                            <option value="japanese">Японская</option>
+                            <option value="mediterranean">Средиземноморская</option>
+                            <option value="other">Другая</option>
+                        </select>
+                    </div>
 
-    <div class="input-group">
-        <label>Максимальное время приготовления</label>
-        <select id="ai-pref-time" class="input-text" onchange="app.updateAiPrefs()">
-            <option value="">Неважно</option>
-            <option value="10">До 10 минут</option>
-            <option value="20">До 20 минут</option>
-            <option value="40">До 40 минут</option>
-        </select>
-    </div>
+                    <div class="input-group">
+                        <label>Максимальное время приготовления</label>
+                        <select id="ai-pref-time" class="input-text" onchange="app.updateAiPrefs()">
+                            <option value="">Неважно</option>
+                            <option value="10">До 10 минут</option>
+                            <option value="20">До 20 минут</option>
+                            <option value="40">До 40 минут</option>
+                        </select>
+                    </div>
 
-    <div class="input-group">
-        <label>Уровень готовки</label>
-        <select id="ai-pref-level" class="input-text" onchange="app.updateAiPrefs()">
-            <option value="">Неважно</option>
-            <option value="easy">Просто</option>
-            <option value="medium">Средний</option>
-        </select>
-    </div>
+                    <div class="input-group">
+                        <label>Уровень готовки</label>
+                        <select id="ai-pref-level" class="input-text" onchange="app.updateAiPrefs()">
+                            <option value="">Неважно</option>
+                            <option value="easy">Просто</option>
+                            <option value="medium">Средний</option>
+                        </select>
+                    </div>
 
-    <div class="input-group">
-        <label>Пищевые ограничения</label>
-        <div class="checkbox-row" style="display:flex; flex-wrap:wrap; gap:8px; font-size:13px;">
-            <label><input type="checkbox" value="gluten_free" onchange="app.updateAiPrefs()"> без глютена</label>
-            <label><input type="checkbox" value="low_carb" onchange="app.updateAiPrefs()"> низкоуглеводное</label>
-            <label><input type="checkbox" value="dairy_free" onchange="app.updateAiPrefs()"> без молочного</label>
-            <label><input type="checkbox" value="vegan" onchange="app.updateAiPrefs()"> веган</label>
-        </div>
-    </div>
-</div>
+                    <div class="input-group">
+                        <label>Пищевые ограничения</label>
+                        <div class="checkbox-row" style="display:flex; flex-wrap:wrap; gap:8px; font-size:13px;">
+                            <label><input type="checkbox" value="gluten_free" onchange="app.updateAiPrefs()"> без глютена</label>
+                            <label><input type="checkbox" value="low_carb" onchange="app.updateAiPrefs()"> низкоуглеводное</label>
+                            <label><input type="checkbox" value="dairy_free" onchange="app.updateAiPrefs()"> без молочного</label>
+                            <label><input type="checkbox" value="vegan" onchange="app.updateAiPrefs()"> веган</label>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="profile-section">
                     <h3>Backend Configuration</h3>
                     <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 12px;">Чтобы использовать AI функции, укажите URL вашего backend:</p>
                     <div class="input-group">
                         <label>Backend URL</label>
-                        <input type="text" id="backend-url" class="form-control" placeholder="https://your-backend.vercel.app" />
+                        <input type="text" id="backend-url" class="form-control" placeholder="https://nutrition-backend-v2-a3nv.vercel.app" />
                     </div>
                     <button class="btn" style="width: 100%; margin-top: 12px;" onclick="app.saveBackendUrl()">Сохранить URL</button>
                     <div id="backend-status" style="margin-top: 12px; padding: 12px; border-radius: 8px; display: none;"></div>
