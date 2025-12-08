@@ -479,13 +479,13 @@ class NutritionApp {
   constructor() {
     const savedUser = loadUserState();
 
-    this.user = savedUser || {
+  this.user = savedUser || {
   goal: "maintain",
   target: { kcal: 1800, protein: 120, fat: 60, carbs: 160 },
   savedRecipes: [],
   shoppingList: [],
-  mood: 3,
-  daysUsing: 1,
+  mood: 3,                          // одно текущее настроение оставляем
+  startDate: new Date().toISOString(), // <-- дата первого запуска
   backendUrl: API_BASE_DEFAULT,
   name: "",
   avatar: null,
@@ -497,6 +497,12 @@ class NutritionApp {
     restrictions: []
   }
 };
+
+// если старый пользователь без startDate — добавим и сохраним
+if (!this.user.startDate) {
+  this.user.startDate = new Date().toISOString();
+  saveUserState(this.user);
+}
 
 // если старый пользователь без aiPrefs — добавим дефолты
 if (!this.user.aiPrefs) {
@@ -706,13 +712,19 @@ if (!this.user.aiPrefs) {
   // Дашборд
   // -----------------------------------------------------------
 
-  updateDashboardStats() {
-    const savedCount = document.getElementById("saved-count");
-    const daysUsing = document.getElementById("days-using");
+updateDashboardStats() {
+  const savedCount = document.getElementById("saved-count");
+  const daysUsing = document.getElementById("days-using");
 
-    if (savedCount) savedCount.textContent = this.user.savedRecipes.length;
-    if (daysUsing) daysUsing.textContent = this.user.daysUsing || 1;
+  if (savedCount) savedCount.textContent = this.user.savedRecipes.length;
+
+  if (daysUsing) {
+    const start = new Date(this.user.startDate);
+    const now = new Date();
+    const diff = Math.max(1, Math.ceil((now - start) / (1000 * 60 * 60 * 24)));
+    daysUsing.textContent = diff;
   }
+}
 
   // -----------------------------------------------------------
   // Scope (curated / ai / mine) + фильтры
