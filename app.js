@@ -1675,22 +1675,20 @@ saveCustomRecipe() {
     nameInput.value = this.user.name || "";
   }
 
-    // аватар
-  const avatarDiv = document.getElementById("profile-avatar");
-  if (avatarDiv) {
-    if (this.user.avatar) {
-      // Рендерим картинку прямо внутрь
-      avatarDiv.innerHTML = `
-        <img src="${this.user.avatar}" alt="Аватар" class="profile-avatar-img" />
-      `;
-      avatarDiv.style.backgroundImage = "none";
-    } else {
-      avatarDiv.innerHTML = this.user.name
-        ? this.user.name[0].toUpperCase()
-        : "🙂";
-      avatarDiv.style.backgroundImage = "none";
-    }
+// аватар
+const avatarDiv = document.getElementById("profile-avatar");
+if (avatarDiv) {
+  if (this.user.avatar) {
+    avatarDiv.style.backgroundImage = `url(${this.user.avatar})`;
+    // НЕ задаём cover, даём работать CSS с contain
+    avatarDiv.textContent = "";
+  } else {
+    avatarDiv.style.backgroundImage = "none";
+    avatarDiv.textContent = this.user.name
+      ? this.user.name[0].toUpperCase()
+      : "🙂";
   }
+}
 
   // цель и КБЖУ
   const goalEl = document.getElementById("profile-goal");
