@@ -130,6 +130,12 @@
                         <h3>🤖 Спросите помощника</h3>
                         <p>AI подберёт рецепты по вашему запросу</p>
                     </div>
+
+                    <div class="cta-card" style="background: var(--color-bg-2); border-color: var(--color-primary);" onclick="app.openKnowledgeHome()">
+  <h3>📚 Питание без ошибок</h3>
+  <p>Коротко и по делу: база, мифы, плато, срывы</p>
+</div>
+
                 </div>
                 
                 <div class="stats-grid">
@@ -419,6 +425,39 @@
                 
                 <div id="ai-recipe-results" class="recipe-grid" style="margin-top: 24px;"></div>
             </div>
+
+            <!-- Knowledge Home -->
+<div class="screen" id="knowledge-home-screen">
+  <div class="back-button" onclick="app.showScreen('dashboard-screen')">← Назад</div>
+  <h2>📚 Питание без ошибок</h2>
+  <p style="color: var(--color-text-secondary); margin-bottom: 16px;">
+    Коротко, понятно, без диет и крайностей
+  </p>
+
+  <div class="kb-grid" id="kb-categories"></div>
+</div>
+
+<!-- Knowledge Category -->
+<div class="screen" id="knowledge-category-screen">
+  <div class="back-button" onclick="app.goBackKnowledge()">← Назад</div>
+  <h2 id="kb-category-title">Категория</h2>
+  <p id="kb-category-subtitle" style="color: var(--color-text-secondary); margin-bottom: 16px;"></p>
+
+  <div class="kb-list" id="kb-articles"></div>
+</div>
+
+<!-- Knowledge Article -->
+<div class="screen" id="knowledge-article-screen">
+  <div class="back-button" onclick="app.goBackKnowledge()">← Назад</div>
+
+  <div class="kb-article">
+    <div class="kb-article-meta" id="kb-article-meta"></div>
+    <h2 id="kb-article-title">Заголовок</h2>
+    <div class="kb-article-body" id="kb-article-body"></div>
+
+    <div class="kb-actions" id="kb-article-actions"></div>
+  </div>
+</div>
 
             <!-- Profile -->
             <div class="screen" id="profile-screen">
