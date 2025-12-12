@@ -665,6 +665,16 @@ if (!this.user.aiPrefs) {
   navigateTo(screenId) {
     this.showScreen(screenId);
   }
+  
+    goBack() {
+    // Если знаем, откуда пришли — возвращаем туда
+    if (this.previousScreen) {
+      this.showScreen(this.previousScreen);
+    } else {
+      // запасной вариант: если почему-то нет previousScreen
+      this.showScreen("recipes-screen");
+    }
+  }
 
   updateNavigation() {
     document.querySelectorAll(".nav-item").forEach(item => {
