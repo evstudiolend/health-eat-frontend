@@ -431,6 +431,141 @@ const COMMON_INGREDIENTS = [
   "Оливковое масло",
   "Лимон"
 ];
+// -------------------------------------------------------------
+// 2.5 База знаний (категории + статьи)
+// -------------------------------------------------------------
+
+const KB_CATEGORIES = [
+  { id: "start", icon:"🥗", title:"С чего начать", desc:"Снижаем тревогу и наводим порядок" },
+  { id: "kbju", icon:"🧮", title:"КБЖУ — просто", desc:"Без страха цифр и крайностей" },
+  { id: "myths", icon:"❌", title:"Мифы и ошибки", desc:"Разбираем популярные заблуждения" },
+  { id: "stress", icon:"⚖️", title:"Похудение без стресса", desc:"Плато, голод, срывы" },
+  { id: "life", icon:"🏢", title:"В реальной жизни", desc:"Офис, нет времени, поездки" },
+];
+
+const KB_ARTICLES = [
+  {
+    id:"a1", categoryId:"start", icon:"🥗",
+    title:"С чего на самом деле стоит начинать питание",
+    desc:"Не с диеты и запретов — а с базы.",
+    meta:"С чего начать • 2 мин",
+    blocks:[
+      { type:"p", text:"Не с диеты. Не с запретов. И не с подсчёта всего подряд." },
+      { type:"checklist", items:["Регулярность приёмов пищи","Нормальные порции","Еда должна насыщать"] },
+      { type:"callout", text:"👉 Вывод: сначала наладь базу — потом усложняй." }
+    ],
+    actions:[{ type:"open_ai_menu", label:"🤖 Собрать меню на день" }]
+  },
+  {
+    id:"a2", categoryId:"kbju", icon:"🧮",
+    title:"Что такое КБЖУ и зачем они вообще нужны",
+    desc:"КБЖУ — это навигатор, а не тюрьма.",
+    meta:"КБЖУ — просто • 2 мин",
+    blocks:[
+      { type:"p", text:"КБЖУ — это не про контроль, а про понимание." },
+      { type:"checklist", items:["Белки → сытость и восстановление","Жиры → гормоны и энергия","Углеводы → сила и работоспособность"] },
+      { type:"callout", text:"👉 КБЖУ — это навигатор, а не тюрьма." }
+    ],
+    actions:[{ type:"high_protein", label:"💪 Показать блюда с высоким белком" }]
+  },
+  {
+    id:"a3", categoryId:"kbju", icon:"🧮",
+    title:"Нужно ли считать КБЖУ всегда",
+    desc:"Нет. Считать — инструмент, а не образ жизни.",
+    meta:"КБЖУ — просто • 2 мин",
+    blocks:[
+      { type:"p", text:"Нет. Считать полезно на старте и когда нужна ясность." },
+      { type:"checklist", items:["Полезно: на старте / чтобы понять порции / если вес стоит","Не обязательно: всю жизнь / каждый грамм / в отпуске"] },
+      { type:"callout", text:"👉 Цель — научиться чувствовать, а не жить с калькулятором." }
+    ],
+    actions:[{ type:"open_ai_menu", label:"🤖 Собрать меню на день" }]
+  },
+  {
+    id:"a4", categoryId:"myths", icon:"❌",
+    title:"Миф: углеводы мешают худеть",
+    desc:"Мешает не еда, а переедание и хаос.",
+    meta:"Мифы и ошибки • 2 мин",
+    blocks:[
+      { type:"p", text:"На самом деле мешает переедание, хаотичное питание и дефицит белка." },
+      { type:"checklist", items:["Углеводы дают энергию","Помогают тренироваться","Снижают риск срывов"] },
+      { type:"callout", text:"👉 Вопрос не в углеводах, а в количестве и контексте." }
+    ],
+    actions:[{ type:"open_ai_menu", label:"🤖 Собрать меню на день" }]
+  },
+  {
+    id:"a5", categoryId:"myths", icon:"❌",
+    title:"Можно ли есть после 18:00",
+    desc:"Можно. Важно не “когда”, а “что и сколько”.",
+    meta:"Мифы и ошибки • 1–2 мин",
+    blocks:[
+      { type:"p", text:"Можно. И нужно, если ты голодна." },
+      { type:"checklist", items:["Важно: сколько","Важно: что именно","Важно: как часто"] },
+      { type:"callout", text:"👉 Голод перед сном часто ведёт к перееданию на следующий день." }
+    ],
+    actions:[{ type:"open_ai_menu", label:"🤖 Собрать меню на день" }]
+  },
+  {
+    id:"a6", categoryId:"stress", icon:"⚖️",
+    title:"Почему вес стоит, даже если «я всё делаю правильно»",
+    desc:"Плато — это этап, не провал.",
+    meta:"Похудение без стресса • 2 мин",
+    blocks:[
+      { type:"p", text:"Иногда вес стоит даже при усилиях — это нормально." },
+      { type:"checklist", items:["Слишком мало еды","Много стресса","Нет сна","Задержка воды"] },
+      { type:"callout", text:"👉 Плато — это не провал, а этап." }
+    ],
+    actions:[{ type:"high_protein", label:"💪 Показать блюда с высоким белком" }]
+  },
+  {
+    id:"a7", categoryId:"stress", icon:"😖",
+    title:"Что делать, если случился срыв",
+    desc:"Ничего не компенсировать — просто вернуться к обычному приёму пищи.",
+    meta:"Похудение без стресса • 2 мин",
+    blocks:[
+      { type:"p", text:"Самое важное — ничего не “отрабатывать”." },
+      { type:"checklist", items:["Не голодать","Не тренироваться “в наказание”","Не урезать еду на следующий день"] },
+      { type:"callout", text:"👉 Просто вернись к обычному приёму пищи." }
+    ],
+    actions:[{ type:"open_ai_menu", label:"🤖 Собрать меню на день" }]
+  },
+  {
+    id:"a8", categoryId:"life", icon:"🏢",
+    title:"Как питаться в офисе и не заказывать фастфуд",
+    desc:"Не идеально — тоже нормально.",
+    meta:"В реальной жизни • 2 мин",
+    blocks:[
+      { type:"p", text:"В офисе помогают простые заготовки и белковые перекусы." },
+      { type:"checklist", items:["Еда с собой (простая)","Готовые наборы","Перекусы с белком"] },
+      { type:"callout", text:"👉 Не идеально — тоже нормально." }
+    ],
+    actions:[{ type:"high_protein", label:"💪 Показать блюда с высоким белком" }]
+  },
+  {
+    id:"a9", categoryId:"life", icon:"⏱️",
+    title:"Что есть, если нет времени готовить",
+    desc:"Быстро ≠ плохо.",
+    meta:"В реальной жизни • 2 мин",
+    blocks:[
+      { type:"p", text:"Минимум усилий — и всё равно можно нормально поесть." },
+      { type:"checklist", items:["Яйца","Творог","Йогурт","Заморозка","Простые гарниры"] },
+      { type:"callout", text:"👉 Быстро ≠ плохо." }
+    ],
+    actions:[{ type:"open_quick", label:"⚡ Показать быстрые рецепты" }]
+  },
+  {
+    id:"a10", categoryId:"stress", icon:"🍽️",
+    title:"Как питаться без диет и чувства вины",
+    desc:"Если система вызывает стресс — она не работает.",
+    meta:"Похудение без стресса • 2 мин",
+    blocks:[
+      { type:"p", text:"Здоровое питание — это гибкость, осознанность и устойчивость." },
+      { type:"checklist", items:["Гибкость вместо запретов","Осознанность вместо контроля","Устойчивость вместо “рывков”"] },
+      { type:"callout", text:"👉 Если система вызывает стресс — она не работает." }
+    ],
+    actions:[{ type:"open_ai_menu", label:"🤖 Собрать меню на день" }]
+  },
+];
+
 
 // -------------------------------------------------------------
 // 3. LocalStorage helpers
@@ -520,6 +655,12 @@ if (!this.user.aiPrefs) {
     this.selectedIngredients = [];
     this.recipeScope = "curated"; // curated | ai | mine
     this.filters = { category: "all", quick: false, office: false };
+    // фильтр, который может включаться из статей
+this.customRecipePredicate = null;
+
+// состояние базы знаний
+this.kbState = { categoryId: null, articleId: null, lastScreen: null };
+
     this.currentScreen = "onboarding-screen";
     this.previousScreen = null;
 
@@ -663,8 +804,13 @@ if (!this.user.aiPrefs) {
   }
 
   navigateTo(screenId) {
-    this.showScreen(screenId);
+  // если пользователь сам идёт в рецепты — отключаем “умный фильтр” из статей
+  if (screenId === "recipes-screen") {
+    this.customRecipePredicate = null;
   }
+  this.showScreen(screenId);
+}
+
   
     goBack() {
     // Если знаем, откуда пришли — возвращаем туда
@@ -706,6 +852,15 @@ if (!this.user.aiPrefs) {
       case "profile-screen":
         this.renderProfile();
         break;
+        case "knowledge-home-screen":
+  this.renderKnowledgeHome();
+  break;
+case "knowledge-category-screen":
+  this.renderKnowledgeCategory();
+  break;
+case "knowledge-article-screen":
+  this.renderKnowledgeArticle();
+  break;
     }
   }
 
@@ -734,6 +889,166 @@ updateDashboardStats() {
     daysUsing.textContent = diff;
   }
 }
+  // -----------------------------------------------------------
+// База знаний (Питание без ошибок)
+// -----------------------------------------------------------
+
+openKnowledgeHome() {
+  this.kbState.categoryId = null;
+  this.kbState.articleId = null;
+  this.kbState.lastScreen = "knowledge-home-screen";
+  this.showScreen("knowledge-home-screen");
+}
+
+openKnowledgeCategory(categoryId) {
+  this.kbState.categoryId = categoryId;
+  this.kbState.articleId = null;
+  this.kbState.lastScreen = "knowledge-category-screen";
+  this.showScreen("knowledge-category-screen");
+}
+
+openKnowledgeArticle(articleId) {
+  this.kbState.articleId = articleId;
+  this.kbState.lastScreen = "knowledge-article-screen";
+  this.showScreen("knowledge-article-screen");
+}
+
+goBackKnowledge() {
+  // статья -> категория -> база знаний -> дашборд
+  if (this.currentScreen === "knowledge-article-screen" && this.kbState.categoryId) {
+    this.showScreen("knowledge-category-screen");
+    return;
+  }
+  if (this.currentScreen === "knowledge-category-screen") {
+    this.showScreen("knowledge-home-screen");
+    return;
+  }
+  this.showScreen("dashboard-screen");
+}
+
+renderKnowledgeHome() {
+  const grid = document.getElementById("kb-categories");
+  if (!grid) return;
+
+  grid.innerHTML = KB_CATEGORIES.map(cat => `
+    <div class="kb-card" onclick="app.openKnowledgeCategory('${cat.id}')">
+      <div class="kb-emoji">${cat.icon}</div>
+      <div class="kb-title">${this.escapeHtml(cat.title)}</div>
+      <p class="kb-desc">${this.escapeHtml(cat.desc)}</p>
+    </div>
+  `).join("");
+}
+
+renderKnowledgeCategory() {
+  const titleEl = document.getElementById("kb-category-title");
+  const subEl = document.getElementById("kb-category-subtitle");
+  const listEl = document.getElementById("kb-articles");
+  if (!titleEl || !subEl || !listEl) return;
+
+  const cat = KB_CATEGORIES.find(c => c.id === this.kbState.categoryId) || KB_CATEGORIES[0];
+  this.kbState.categoryId = cat.id;
+
+  titleEl.textContent = `${cat.icon} ${cat.title}`;
+  subEl.textContent = cat.desc;
+
+  const articles = KB_ARTICLES.filter(a => a.categoryId === cat.id);
+
+  if (!articles.length) {
+    listEl.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">📚</div>
+        <p>В этой категории пока нет статей</p>
+      </div>`;
+    return;
+  }
+
+  listEl.innerHTML = articles.map(a => `
+    <div class="kb-article-card" onclick="app.openKnowledgeArticle('${a.id}')">
+      <div class="kb-row">
+        <div class="kb-ico">${a.icon || "📌"}</div>
+        <div>
+          <div class="kb-a-title">${this.escapeHtml(a.title)}</div>
+          <p class="kb-a-desc">${this.escapeHtml(a.desc || "")}</p>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+renderKnowledgeArticle() {
+  const metaEl = document.getElementById("kb-article-meta");
+  const titleEl = document.getElementById("kb-article-title");
+  const bodyEl = document.getElementById("kb-article-body");
+  const actionsEl = document.getElementById("kb-article-actions");
+  if (!metaEl || !titleEl || !bodyEl || !actionsEl) return;
+
+  const article = KB_ARTICLES.find(a => a.id === this.kbState.articleId) || KB_ARTICLES[0];
+  this.kbState.articleId = article.id;
+  this.kbState.categoryId = article.categoryId;
+
+  metaEl.textContent = article.meta || "";
+  titleEl.textContent = article.title;
+
+  bodyEl.innerHTML = (article.blocks || []).map(b => {
+    if (b.type === "p") {
+      return `<p>${this.escapeHtml(b.text || "")}</p>`;
+    }
+    if (b.type === "callout") {
+      return `<div class="kb-callout">${this.escapeHtml(b.text || "")}</div>`;
+    }
+    if (b.type === "checklist") {
+      const items = (b.items || []).map(i => `<li>${this.escapeHtml(i)}</li>`).join("");
+      return `<ul class="kb-checklist">${items}</ul>`;
+    }
+    return "";
+  }).join("");
+
+  actionsEl.innerHTML = (article.actions || []).map(a => `
+    <button class="btn btn-large" style="width:100%;" onclick="app.handleKnowledgeAction('${a.type}')">
+      ${this.escapeHtml(a.label)}
+    </button>
+  `).join("");
+}
+
+handleKnowledgeAction(type) {
+  if (type === "high_protein") {
+    this.showHighProteinRecipes();
+    return;
+  }
+  if (type === "open_ai_menu") {
+    this.openAiMenuFromKnowledge();
+    return;
+  }
+  if (type === "open_quick") {
+    this.openQuickScreen();
+    return;
+  }
+}
+
+showHighProteinRecipes() {
+  // включаем “умный” фильтр и показываем рецепты
+  this.customRecipePredicate = (r) => (r.kbju?.protein || 0) >= 25;
+
+  // сброс обычных фильтров, чтобы не было “пусто”
+  this.filters = { category: "all", quick: false, office: false };
+
+  // показываем все источники или оставляем текущий — как тебе удобнее
+  // вариант: показать редакционные, чтобы было стабильнее
+  this.recipeScope = "curated";
+
+  this.showScreen("recipes-screen");
+  this.renderAllRecipes();
+}
+
+openAiMenuFromKnowledge() {
+  this.showScreen("ai-chat-screen");
+  const input = document.getElementById("chat-input");
+  if (input) {
+    input.value = "Собери меню на день под мой КБЖУ: завтрак/обед/ужин/перекус. Укажи КБЖУ на приём пищи и предложи блюда из приложения, если возможно.";
+    input.focus();
+  }
+}
+
 
   // -----------------------------------------------------------
   // Scope (curated / ai / mine) + фильтры
@@ -816,6 +1131,10 @@ updateDashboardStats() {
     if (this.filters.office) {
       list = list.filter(r => r.office_friendly);
     }
+    
+if (this.customRecipePredicate) {
+  list = list.filter(this.customRecipePredicate);
+}
 
     return list;
   }
