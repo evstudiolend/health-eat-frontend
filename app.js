@@ -1048,6 +1048,12 @@ updateDashboardStats() {
 
     this.showScreen("recipe-detail-screen");
   }
+    goBackFromRecipe() {
+    // экран, с которого пришли в карточку;
+    // если по какой-то причине его нет — вернёмся на дашборд
+    const target = this.previousScreen || "dashboard-screen";
+    this.showScreen(target);
+  }
 
   toggleSaveRecipe(recipeId) {
     const idx = this.user.savedRecipes.indexOf(recipeId);
