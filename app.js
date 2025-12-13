@@ -1294,7 +1294,7 @@ if (this.customRecipePredicate) {
     const container = document.getElementById("recipe-detail-content");
     if (!container) return;
 
-    const isSaved = this.user.savedRecipes.includes(recipe.id);
+    const isSaved = (this.user.savedRecipes || []).map(String).includes(String(recipe.id));
     const difficultyMap = { easy: "Легко", medium: "Средне", hard: "Сложно" };
 
     container.innerHTML = `
@@ -1795,18 +1795,7 @@ saveCustomRecipe() {
     const container = document.getElementById("pantry-recipes");
     if (!container) return;
 
-    // ручной ввод (через запятую или с новой строки)
-    const manualInput = document.getElementById("pantry-free-input");
-    const extra = [];
-    if (manualInput && manualInput.value.trim()) {
-      manualInput.value
-        .split(/[,;\n]/)
-        .map(s => s.trim())
-        .filter(Boolean)
-        .forEach(v => extra.push(v));
-    }
-
-    const allIngredients = [...this.selectedIngredients, ...extra];
+   const allIngredients = [...this.selectedIngredients];
 
     if (!allIngredients.length) {
       alert("Выберите или введите хотя бы один ингредиент");
