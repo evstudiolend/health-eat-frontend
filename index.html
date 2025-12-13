@@ -489,13 +489,15 @@
                             <label for="profile-name" style="font-size: 13px; color: var(--color-text-secondary);">
                                 Имя
                             </label>
-                            <input
-                                type="text"
-                                id="profile-name"
-                                class="input-text"
-                                placeholder="Как к вам обращаться?"
-                                onchange="app.updateProfileName()"
-                            />
+                           <input
+  type="text"
+  id="profile-name"
+  class="input-text"
+  placeholder="Как к вам обращаться?"
+  oninput="app.updateProfileName()"
+  onblur="app.updateProfileName()"
+/>
+
                             <div style="margin-top: 8px;">
                                 <label for="profile-avatar-file" class="link-label" style="font-size: 13px; cursor: pointer;">
                                     Загрузить фото
