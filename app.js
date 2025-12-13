@@ -2101,6 +2101,21 @@ if (avatarDiv) {
   this.renderMyRecipesSummary();
   this.renderGoalTips();
 }
+  updateProfileName() {
+  const input = document.getElementById("profile-name");
+  if (!input) return;
+
+  this.user.name = (input.value || "").trim();
+  saveUserState(this.user);
+
+  // чтобы сразу обновилась буква/аватар в профиле
+  const avatarDiv = document.getElementById("profile-avatar");
+  if (avatarDiv && !this.user.avatar) {
+    avatarDiv.textContent = this.user.name
+      ? this.user.name[0].toUpperCase()
+      : "🙂";
+  }
+}
   // --- Вспомогательный метод: расчёт любимых ингредиентов ---
 computeFavoriteIngredients() {
   // Берём ваши собственные рецепты + сохранённые
