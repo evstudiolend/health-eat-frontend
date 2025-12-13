@@ -96,23 +96,24 @@
                     <p style="color: var(--color-text-secondary); margin-bottom: 32px;">Выберите, что вам ближе всего</p>
                     
                     <div class="goal-buttons">
-                        <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
-                            <div style="font-size: 24px; margin-bottom: 8px;">📉</div>
-                            <strong>Снизить вес</strong>
-                            <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровое похудение</p>
-                        </button>
-                        
-                        <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
-                            <div style="font-size: 24px; margin-bottom: 8px;">⚖️</div>
-                            <strong>Поддерживать вес</strong>
-                            <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Сохранить текущую форму</p>
-                        </button>
-                        
-                        <button class="goal-btn" onclick="app.showScreen('dashboard-screen')">
-                            <div style="font-size: 24px; margin-bottom: 8px;">📈</div>
-                            <strong>Набрать массу</strong>
-                            <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровый набор веса</p>
-                        </button>
+                       <button class="goal-btn" onclick="app.setGoal('lose')">
+    <div style="font-size: 24px; margin-bottom: 8px;">📉</div>
+    <strong>Снизить вес</strong>
+    <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровое похудение</p>
+</button>
+
+<button class="goal-btn" onclick="app.setGoal('maintain')">
+    <div style="font-size: 24px; margin-bottom: 8px;">⚖️</div>
+    <strong>Поддерживать вес</strong>
+    <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Сохранить текущую форму</p>
+</button>
+
+<button class="goal-btn" onclick="app.setGoal('gain')">
+    <div style="font-size: 24px; margin-bottom: 8px;">📈</div>
+    <strong>Набрать массу</strong>
+    <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 4px;">Здоровый набор веса</p>
+</button>
+
                     </div>
                 </div>
             </div>
@@ -516,7 +517,11 @@
                     <p id="profile-goal">Поддерживать вес</p>
                     <p id="profile-goal-tips"
                        style="color: var(--color-text-secondary); font-size: 13px; margin-top: 4px;"></p>
+                    <button class="btn btn-secondary" onclick="app.startGoalSelection()">
+    Изменить цель
+</button>
                 </div>
+                
 
                 <div class="profile-section">
                     <h3>Целевые показатели</h3>
