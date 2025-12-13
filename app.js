@@ -409,7 +409,7 @@ const SAMPLE_RECIPES = [
 
 const COMMON_INGREDIENTS = [
   "Куриная грудка",
-  "Яйцы",
+  "Яйца",
   "Творог",
   "Греческий йогурт",
   "Гречка",
@@ -869,12 +869,18 @@ case "knowledge-article-screen":
   }
 
   // -----------------------------------------------------------
-  // Онбординг / цель
-  // -----------------------------------------------------------
+// Онбординг / цель
+// -----------------------------------------------------------
 
-  startGoalSelection() {
-    this.showScreen("goal-screen");
-  }
+startGoalSelection() {
+  this.showScreen("goal-screen");
+}
+
+setGoal(goal) {
+  this.user.goal = goal || "maintain";
+  saveUserState(this.user);
+  this.showScreen("dashboard-screen");
+}
 
   // -----------------------------------------------------------
   // Дашборд
@@ -1185,7 +1191,7 @@ if (this.customRecipePredicate) {
   }
 
   renderRecipeCard(recipe) {
-    const isSaved = this.user.savedRecipes.includes(recipe.id);
+    const isSaved = (this.user.savedRecipes || []).map(String).includes(String(recipe.id));
     const difficultyMap = { easy: "⭐", medium: "⭐⭐", hard: "⭐⭐⭐" };
 
     // аккуратно формируем картинку / эмодзи
@@ -1379,20 +1385,24 @@ if (this.customRecipePredicate) {
   }
 
   toggleSaveRecipe(recipeId) {
-    const idx = this.user.savedRecipes.indexOf(recipeId);
-    if (idx >= 0) {
-      this.user.savedRecipes.splice(idx, 1);
-    } else {
-      this.user.savedRecipes.push(recipeId);
-    }
-    saveUserState(this.user);
-    // перерисуем текущий экран
-    if (this.currentScreen === "recipes-screen") {
-      this.renderAllRecipes();
-    } else if (this.currentScreen === "recipe-detail-screen") {
-      this.showRecipeDetail(recipeId);
-    }
+  const id = String(recipeId);
+
+  const idx = (this.user.savedRecipes || []).map(String).indexOf(id);
+
+  if (idx >= 0) {
+    this.user.savedRecipes.splice(idx, 1);
+  } else {
+    this.user.savedRecipes.push(id);
   }
+
+  saveUserState(this.user);
+
+  if (this.currentScreen === "recipes-screen") {
+    this.renderAllRecipes();
+  } else if (this.currentScreen === "recipe-detail-screen") {
+    this.showRecipeDetail(id);
+  }
+}
 
   addToShoppingList(recipeId) {
     const recipe = this.getRecipeById(recipeId);
