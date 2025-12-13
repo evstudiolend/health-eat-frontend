@@ -615,15 +615,15 @@ class NutritionApp {
     const savedUser = loadUserState();
 
 this.user = savedUser || {
-  goal: "maintain",
+  goal: null, // <-- ВАЖНО: цель не выбрана на первом запуске
   target: { kcal: 1800, protein: 120, fat: 60, carbs: 160 },
   savedRecipes: [],
   shoppingList: [],
-  startDate: new Date().toISOString(),      // дата первого запуска
+  startDate: new Date().toISOString(),
   backendUrl: API_BASE_DEFAULT,
   name: "",
   avatar: null,
-  ingredientStats: {}, // для любимых ингредиентов
+  ingredientStats: {},
   aiPrefs: {
     cuisine: "",
     maxTime: "",
@@ -702,7 +702,11 @@ this.kbState = { categoryId: null, articleId: null, lastScreen: null };
     this.renderIngredientChips();
     this.loadBackendUrl();
     this.checkBackendHealth();
-    this.showScreen("onboarding-screen");
+   if (this.user.goal) {
+  this.showScreen("dashboard-screen");
+} else {
+  this.showScreen("onboarding-screen");
+}
   }
 
   // -----------------------------------------------------------
