@@ -1804,10 +1804,10 @@ saveCustomRecipe() {
 
     // прелоадер
     container.innerHTML = `
-      <div class="empty-state">
-        <div class="empty-state-icon">🤖</div>
-        <p>Подбираю рецепты из ваших продуктов…</p>
-      </div>`;
+  <div class="empty-state">
+    <img class="loading-cat" src="Cat.png" alt="Подбираю рецепт" />
+    <p>Подбираю рецепты из ваших продуктов…</p>
+  </div>`;
 
     // сначала пробуем AI
     try {
