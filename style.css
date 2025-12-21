@@ -2001,4 +2001,12 @@ h3 {
   gap: var(--space-10);
   margin-top: var(--space-16);
 }
+.loading-cat{
+  width: 220px;       /* подгони под свой экран */
+  max-width: 70vw;
+  height: auto;
+  display: block;
+  margin: 8px auto 14px;
+  border-radius: 16px;
+}
 
